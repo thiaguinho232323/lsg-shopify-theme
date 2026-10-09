@@ -1,0 +1,3 @@
+{%- comment -%} Arma el link de WhatsApp con un mensaje ya escrito {%- endcomment -%}
+{%- assign _msg = message | url_encode | replace: '+', '%20' -%}
+https://wa.me/{{ settings.whatsapp | remove: '+' | remove: ' ' }}?text={{ _msg }}

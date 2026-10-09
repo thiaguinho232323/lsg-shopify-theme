@@ -1,0 +1,9 @@
+{%- comment -%} Muestra un precio (en centavos) como "USD 1.050" {%- endcomment -%}
+{%- assign _u = amount | divided_by: 100 -%}
+{%- if _u >= 1000 -%}
+  {%- assign _k = _u | divided_by: 1000 -%}
+  {%- assign _r = _u | modulo: 1000 | plus: 1000 | append: '' | slice: 1, 3 -%}
+USD {{ _k }}.{{ _r }}
+{%- else -%}
+USD {{ _u }}
+{%- endif -%}

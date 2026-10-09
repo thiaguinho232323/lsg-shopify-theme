@@ -1,0 +1,54 @@
+{%- comment -%}
+  Datos de la pieza desde sus etiquetas: numero:13 · condicion:DS · badge:Pieza única · destacada · reservada
+{%- endcomment -%}
+{%- assign p_num = '' -%}
+{%- assign p_cond = '' -%}
+{%- assign p_badge = '' -%}
+{%- assign p_reservada = false -%}
+{%- for tag in product.tags -%}
+  {%- assign tl = tag | downcase -%}
+  {%- if tl contains 'numero:' -%}{%- assign p_num = tag | split: ':' | last | strip -%}{%- endif -%}
+  {%- if tl contains 'condicion:' -%}{%- assign p_cond = tag | split: ':' | last | strip -%}{%- endif -%}
+  {%- if tl contains 'badge:' -%}{%- assign p_badge = tag | split: ':' | last | strip -%}{%- endif -%}
+  {%- if tl == 'reservada' -%}{%- assign p_reservada = true -%}{%- endif -%}
+{%- endfor -%}
+{%- assign p_num_label = '' -%}
+{%- if p_num != '' -%}{%- assign p_num_label = '00' | append: p_num | slice: -3, 3 | prepend: 'Nº ' -%}{%- endif -%}
+{%- assign p_vendida = false -%}
+{%- unless product.available -%}{%- assign p_vendida = true -%}{%- endunless -%}
+{%- assign p_talle = '' -%}
+{%- for option in product.options_with_values -%}
+  {%- assign on = option.name | downcase -%}
+  {%- if on contains 'talle' or on contains 'size' -%}{%- assign p_talle = option.values | join: ' / ' -%}{%- endif -%}
+{%- endfor -%}
+{%- if p_talle == '' -%}{%- assign p_talle = 'Único' -%}{%- endif -%}
+{%- assign img1 = product.featured_image -%}
+{%- assign img2 = product.images[1] -%}
+{%- if sizes == blank -%}{%- assign sizes = '(max-width: 768px) 50vw, 25vw' -%}{%- endif -%}
+<a href="{{ product.url }}" class="card{% if p_vendida %} is-sold{% endif %}"
+   data-card
+   data-brand="{{ product.vendor | escape }}"
+   data-cat="{{ product.type | escape }}"
+   data-size="{{ p_talle | escape }}"
+   data-price="{{ product.price }}"
+   data-num="{{ p_num | default: 0 }}"
+   data-sold="{{ p_vendida }}">
+  <div class="card-img{% if img2 %} has2{% endif %}">
+    {%- if img1 -%}
+      {{ img1 | image_url: width: 900 | image_tag: class: 'i1', loading: loading, sizes: sizes, widths: '360, 540, 720, 900', alt: product.title }}
+    {%- endif -%}
+    {%- if img2 and p_vendida == false -%}
+      {{ img2 | image_url: width: 900 | image_tag: class: 'i2', loading: 'lazy', sizes: sizes, widths: '360, 540, 720, 900', alt: '' }}
+    {%- endif -%}
+    {%- if p_badge != '' and p_vendida == false -%}<span class="badge">{{ p_badge }}</span>{%- endif -%}
+    {%- if p_vendida -%}<span class="state">Vendida</span>{%- elsif p_reservada -%}<span class="state">Reservada</span>{%- endif -%}
+  </div>
+  <div class="card-meta">
+    <div class="card-row"><span class="b">{{ product.vendor }}</span><span class="n">{{ p_num_label }}</span></div>
+    <h3>{{ product.title }}</h3>
+    <div class="card-foot">
+      <span class="p">{% render 'usd', amount: product.price %}</span>
+      <span class="t">{% if p_talle == 'Único' %}Talle único{% else %}Talle {{ p_talle }}{% endif %}</span>
+    </div>
+  </div>
+</a>

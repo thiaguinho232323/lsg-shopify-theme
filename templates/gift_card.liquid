@@ -1,0 +1,3 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Gift card · LSG</title>{{ 'lsg.css' | asset_url | stylesheet_tag }}{{ content_for_header }}</head>
+<body><div class="plain"><h1>{{ gift_card.balance | money }}</h1><p>{{ gift_card.code | format_code }}</p></div></body></html>

@@ -1,0 +1,103 @@
+{
+  "sections": {
+    "hero": {
+      "type": "lsg-hero",
+      "settings": {}
+    },
+    "featured": {
+      "type": "lsg-featured",
+      "settings": {}
+    },
+    "phrase": {
+      "type": "lsg-phrase",
+      "settings": {}
+    },
+    "brands": {
+      "type": "lsg-brands",
+      "settings": {}
+    },
+    "mirada": {
+      "type": "lsg-mirada",
+      "settings": {},
+      "blocks": {
+        "p1": {
+          "type": "principio",
+          "settings": {
+            "n": "I",
+            "title": "Autenticidad verificada",
+            "text": "Cada pieza se revisa en detalle antes de formar parte de la selección. Si hay dudas, no entra."
+          }
+        },
+        "p2": {
+          "type": "principio",
+          "settings": {
+            "n": "II",
+            "title": "Estado declarado",
+            "text": "Nueva, impecable o con uso: lo indicamos tal cual es, con fotos reales y sin letra chica."
+          }
+        },
+        "p3": {
+          "type": "principio",
+          "settings": {
+            "n": "III",
+            "title": "Unidades únicas",
+            "text": "No reponemos. Cada pieza es irrepetible y, cuando encuentra dueño, pasa al archivo."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ]
+    },
+    "steps": {
+      "type": "lsg-steps",
+      "settings": {},
+      "blocks": {
+        "s1": {
+          "type": "paso",
+          "settings": {
+            "n": "01",
+            "title": "Elegís",
+            "text": "Recorrés la selección y abrís la pieza que te interesa para ver fotos, talle y estado."
+          }
+        },
+        "s2": {
+          "type": "paso",
+          "settings": {
+            "n": "02",
+            "title": "Consultás",
+            "text": "Con un toque nos escribís por WhatsApp, con la pieza ya indicada. Te respondemos personalmente."
+          }
+        },
+        "s3": {
+          "type": "paso",
+          "settings": {
+            "n": "03",
+            "title": "La recibís",
+            "text": "Coordinamos el pago y el envío a cualquier punto del país, con seguimiento."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ]
+    },
+    "encargos": {
+      "type": "lsg-encargos",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "featured",
+    "phrase",
+    "brands",
+    "mirada",
+    "steps",
+    "encargos"
+  ]
+}

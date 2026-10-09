@@ -1,0 +1,137 @@
+{%- comment -%}
+  Datos de la pieza desde sus etiquetas: numero:13 · condicion:DS · badge:Pieza única · destacada · reservada
+{%- endcomment -%}
+{%- assign p_num = '' -%}
+{%- assign p_cond = '' -%}
+{%- assign p_badge = '' -%}
+{%- assign p_reservada = false -%}
+{%- for tag in product.tags -%}
+  {%- assign tl = tag | downcase -%}
+  {%- if tl contains 'numero:' -%}{%- assign p_num = tag | split: ':' | last | strip -%}{%- endif -%}
+  {%- if tl contains 'condicion:' -%}{%- assign p_cond = tag | split: ':' | last | strip -%}{%- endif -%}
+  {%- if tl contains 'badge:' -%}{%- assign p_badge = tag | split: ':' | last | strip -%}{%- endif -%}
+  {%- if tl == 'reservada' -%}{%- assign p_reservada = true -%}{%- endif -%}
+{%- endfor -%}
+{%- assign p_num_label = '' -%}
+{%- if p_num != '' -%}{%- assign p_num_label = '00' | append: p_num | slice: -3, 3 | prepend: 'Nº ' -%}{%- endif -%}
+{%- assign p_vendida = false -%}
+{%- unless product.available -%}{%- assign p_vendida = true -%}{%- endunless -%}
+{%- assign p_talle = '' -%}
+{%- for option in product.options_with_values -%}
+  {%- assign on = option.name | downcase -%}
+  {%- if on contains 'talle' or on contains 'size' -%}{%- assign p_talle = option.values | join: ' / ' -%}{%- endif -%}
+{%- endfor -%}
+{%- if p_talle == '' -%}{%- assign p_talle = 'Único' -%}{%- endif -%}
+{%- capture msg -%}
+  {%- if p_vendida -%}Hola LSG. Vi la pieza {{ p_num_label }} — {{ product.vendor }} {{ product.title }}, que ya no está disponible. ¿Tienen algo similar?
+  {%- else -%}Hola LSG. Me interesa la pieza {% if p_num_label != '' %}{{ p_num_label }} — {% endif %}{{ product.vendor }} {{ product.title }}{% if p_talle != 'Único' %} (talle {{ p_talle }}){% endif %}. ¿Sigue disponible?{%- endif -%}
+{%- endcapture -%}
+{%- capture wa -%}{% render 'wa-url', message: msg %}{%- endcapture -%}
+{%- assign cond_l = p_cond | downcase -%}
+{%- case cond_l -%}
+  {%- when 'ds' -%}{%- assign cond_note = 'Deadstock: nueva, sin uso.' -%}
+  {%- when 'nueva' -%}{%- assign cond_note = 'Sin uso, con etiquetas o en su caja original.' -%}
+  {%- when 'impecable' -%}{%- assign cond_note = 'Usada muy pocas veces. Sin detalles visibles.' -%}
+  {%- when 'con uso' -%}{%- assign cond_note = 'Uso visible y honesto. Consultanos por fotos de detalle.' -%}
+  {%- else -%}{%- assign cond_note = '' -%}
+{%- endcase -%}
+<div class="pdp{% if p_vendida %} is-sold{% endif %}">
+  <div class="wrap">
+    <nav class="crumbs">
+      <a href="{{ routes.all_products_collection_url }}">Selección</a><span>/</span>
+      <a href="{{ routes.all_products_collection_url }}?marca={{ product.vendor | url_encode }}">{{ product.vendor }}</a><span>/</span>
+      <span class="cur">{% if p_num_label != '' %}{{ p_num_label }}{% else %}{{ product.title }}{% endif %}</span>
+    </nav>
+    <div class="pdp-grid">
+      <div>
+        <div class="gal" data-gallery>
+          {%- if product.images.size > 1 -%}
+            <div class="thumbs">
+              {%- for img in product.images -%}
+                <button type="button" data-thumb="{{ forloop.index0 }}" class="{% if forloop.first %}on{% endif %}" aria-label="Ver foto {{ forloop.index }}">
+                  {{ img | image_url: width: 200 | image_tag: loading: 'lazy', alt: '' }}
+                </button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+          <div class="gal-main">
+            <div class="track no-scrollbar" data-track>
+              {%- for img in product.images -%}
+                {%- if forloop.first -%}{%- assign ld = 'eager' -%}{%- else -%}{%- assign ld = 'lazy' -%}{%- endif -%}
+                <button type="button" data-open="{{ forloop.index0 }}" aria-label="Ampliar foto" data-full="{{ img | image_url: width: 2400 }}">
+                  {{ img | image_url: width: 1400 | image_tag: loading: ld, sizes: '(max-width: 768px) 100vw, 55vw', widths: '600, 900, 1200, 1400', alt: product.title }}
+                </button>
+              {%- endfor -%}
+            </div>
+            {%- if p_badge != '' and p_vendida == false -%}<span class="badge">{{ p_badge }}</span>{%- endif -%}
+            {%- if product.images.size > 1 -%}
+              <div class="dots">{%- for img in product.images -%}<i class="{% if forloop.first %}on{% endif %}"></i>{%- endfor -%}</div>
+            {%- endif -%}
+            <span class="counter"><span data-idx>1</span> / {{ product.images.size }}</span>
+          </div>
+          <div class="lbox" data-lbox role="dialog" aria-label="Fotos ampliadas">
+            <div class="lbox-h"><span><span data-lidx>1</span> / {{ product.images.size }} · <span data-lhint>Tocá para ampliar</span></span><button type="button" data-lclose aria-label="Cerrar">{% render 'icon', name: 'close' %}</button></div>
+            <div class="lbox-s" data-lstage><img alt="{{ product.title | escape }}" data-limg></div>
+            {%- if product.images.size > 1 -%}
+              <div class="lbox-f"><button type="button" class="btn btn-ghost" data-lprev>Anterior</button><button type="button" class="btn btn-ghost" data-lnext>Siguiente</button></div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      <div class="info">
+        <div class="info-in">
+          <div class="info-top">
+            <span class="gold">{{ p_num_label }}</span>
+            <span class="st{% if p_vendida %} sold{% elsif p_reservada %} res{% endif %}"><i></i>{% if p_vendida %}Vendida{% elsif p_reservada %}Reservada{% else %}Disponible{% endif %}</span>
+          </div>
+          <p class="brand">{{ product.vendor }}</p>
+          <h1>{{ product.title }}</h1>
+          <p class="price">{% render 'usd', amount: product.price %}</p>
+          <p class="price-note">Precio en dólares. Consultanos por pago en pesos.</p>
+          <dl class="specs">
+            <div><dt>Talle</dt><dd>{{ p_talle }}</dd></div>
+            {%- if p_cond != '' -%}<div><dt>Condición</dt><dd>{{ p_cond }}</dd></div>{%- endif -%}
+            {%- if product.type != blank -%}<div><dt>Categoría</dt><dd>{{ product.type }}</dd></div>{%- endif -%}
+          </dl>
+          {%- if cond_note != '' -%}<p class="cond-note">{{ cond_note }}</p>{%- endif -%}
+          <a class="btn btn-gold wa-desk" href="{{ wa | strip }}" target="_blank" rel="noopener">{% render 'icon', name: 'whatsapp' %} {% if p_vendida %}Consultar por algo similar{% else %}Consultar por WhatsApp{% endif %}</a>
+          {%- if p_reservada -%}<p class="res-note">Esta pieza está reservada. Escribinos para quedar en lista de espera.</p>{%- endif -%}
+          {%- if product.description != blank -%}
+            <div class="desc"><span class="kicker">Sobre la pieza</span><div class="rte">{{ product.description }}</div></div>
+          {%- endif -%}
+          <div class="trust"><span>Autenticidad<br>verificada</span><span>Envíos a<br>todo el país</span><span>Atención<br>personal</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- assign rel_count = 0 -%}
+{%- capture rel -%}
+  {%- for p in collections.all.products -%}
+    {%- if p.id != product.id and p.available and rel_count < 4 -%}
+      {%- assign rel_count = rel_count | plus: 1 -%}
+      {% render 'piece-card', product: p, loading: 'lazy' %}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if rel_count > 0 -%}
+<section class="related">
+  <div class="wrap">
+    <div class="related-h"><h2>Otras <span class="gold">piezas</span></h2><a class="link-u" href="{{ routes.all_products_collection_url }}">Ver todas {% render 'icon', name: 'arrow' %}</a></div>
+    <div class="grid">{{ rel }}</div>
+  </div>
+</section>
+{%- endif -%}
+
+<div class="mbar">
+  <div class="mbar-in">
+    <div style="min-width:0"><p class="b">{{ product.vendor }}</p><p class="p">{% render 'usd', amount: product.price %}</p></div>
+    <a class="btn btn-gold" href="{{ wa | strip }}" target="_blank" rel="noopener">{% render 'icon', name: 'whatsapp' %} {% if p_vendida %}Algo similar{% else %}Consultar{% endif %}</a>
+  </div>
+</div>
+<div class="mbar-space"></div>
+{% schema %}
+{ "name": "Ficha de pieza", "settings": [] }
+{% endschema %}

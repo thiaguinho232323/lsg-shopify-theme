@@ -1,0 +1,38 @@
+<section id="marcas" class="sec" style="scroll-margin-top:80px">
+  <div class="wrap">
+    <div class="brands-head reveal" data-reveal>
+      <div>
+        <p class="kicker">{{ section.settings.kicker }}</p>
+        <h2 class="title t-xl" style="margin-top:20px">{{ section.settings.title }}</h2>
+      </div>
+      <p>{{ section.settings.text }}</p>
+    </div>
+    <ul class="brand-list">
+      {%- assign n = 0 -%}
+      {%- for vendor in shop.vendors -%}
+        {%- assign c = 0 -%}
+        {%- for p in collections.all.products -%}{%- if p.vendor == vendor and p.available -%}{%- assign c = c | plus: 1 -%}{%- endif -%}{%- endfor -%}
+        {%- if c > 0 -%}
+          {%- assign n = n | plus: 1 -%}
+          <li class="reveal" data-reveal style="transition-delay:{{ n | times: 60 }}ms">
+            <a href="{{ routes.all_products_collection_url }}?marca={{ vendor | url_encode }}">
+              <span class="brand-l"><span class="brand-n">{% if n < 10 %}0{% endif %}{{ n }}</span><span class="brand-name">{{ vendor }}</span></span>
+              <span class="brand-c">{% if c == 1 %}1 pieza{% else %}{{ c }} piezas{% endif %}</span>
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Inicio · Marcas",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Texto superior", "default": "Casas seleccionadas" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Marcas" },
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "Trabajamos con pocas casas y las conocemos en detalle. Elegí una para ver sus piezas disponibles." }
+  ],
+  "presets": [{ "name": "Inicio · Marcas" }]
+}
+{% endschema %}

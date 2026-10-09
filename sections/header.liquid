@@ -1,0 +1,33 @@
+{%- capture wa -%}{% render 'wa-url', message: 'Hola LSG. Estoy buscando una pieza y quería consultarles.' %}{%- endcapture -%}
+<header class="hdr" data-hdr>
+  <div class="wrap hdr-in">
+    <a href="{{ routes.root_url }}" aria-label="LSG — Inicio">{% render 'monogram' %}</a>
+    <nav class="nav">
+      <a class="link-u" href="{{ routes.all_products_collection_url }}">Selección</a>
+      <a class="link-u" href="{{ routes.root_url }}#marcas">Marcas</a>
+      <a class="link-u" href="{{ routes.root_url }}#nuestra-mirada">Nuestra mirada</a>
+      <a class="link-u" href="{{ routes.root_url }}#como-adquirir">Cómo adquirir</a>
+    </nav>
+    <a class="hdr-cta" href="{{ wa | strip }}" target="_blank" rel="noopener">Contacto</a>
+    <button class="burger" data-burger aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+<div class="mmenu" data-mmenu>
+  <p class="kicker">Menú</p>
+  <nav>
+    <a href="{{ routes.all_products_collection_url }}"><span>01</span>Selección</a>
+    <a href="{{ routes.root_url }}#marcas"><span>02</span>Marcas</a>
+    <a href="{{ routes.root_url }}#nuestra-mirada"><span>03</span>Nuestra mirada</a>
+    <a href="{{ routes.root_url }}#como-adquirir"><span>04</span>Cómo adquirir</a>
+  </nav>
+  <div class="mmenu-foot">
+    <a class="btn btn-gold" href="{{ wa | strip }}" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+    <div class="socials">
+      <a href="{{ settings.instagram }}" target="_blank" rel="noopener">{% render 'icon', name: 'instagram' %} {{ settings.handle }}</a>
+      <a href="{{ settings.tiktok }}" target="_blank" rel="noopener">{% render 'icon', name: 'tiktok' %} {{ settings.handle }}</a>
+    </div>
+  </div>
+</div>
+{% schema %}
+{ "name": "Encabezado", "settings": [] }
+{% endschema %}

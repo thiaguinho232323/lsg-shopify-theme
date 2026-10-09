@@ -1,0 +1,15 @@
+<section class="sec phrase">
+  <div class="center reveal" data-reveal style="max-width:56rem">
+    <p>{{ section.settings.line_1 }}<br><span class="gold">{{ section.settings.line_2 }}</span></p>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Inicio · Frase",
+  "settings": [
+    { "type": "text", "id": "line_1", "label": "Línea 1", "default": "Cada pieza fue elegida." },
+    { "type": "text", "id": "line_2", "label": "Línea 2 (dorada)", "default": "Ninguna está por casualidad." }
+  ],
+  "presets": [{ "name": "Inicio · Frase" }]
+}
+{% endschema %}

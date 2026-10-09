@@ -1,0 +1,37 @@
+{%- capture wa -%}{% render 'wa-url', message: 'Hola LSG. Estoy buscando una pieza y quería consultarles.' %}{%- endcapture -%}
+<section class="bg-sec encargos">
+  {%- if section.settings.image != blank -%}
+    <div class="bg-img" aria-hidden="true" style="background-image:url('{{ section.settings.image | image_url: width: 2000 }}')"></div>
+  {%- elsif section.settings.image_url != blank -%}
+    <div class="bg-img" aria-hidden="true" style="background-image:url('{{ section.settings.image_url }}')"></div>
+  {%- endif -%}
+  <div class="bg-shade" style="background:rgba(10,10,10,.6)"></div>
+  <div class="bg-fade"></div>
+  <div class="center reveal" data-reveal>
+    <p class="kicker">{{ section.settings.kicker }}</p>
+    <span class="line" aria-hidden="true"></span>
+    <h2 class="title">{{ section.settings.title }} <span class="gold">{{ section.settings.title_gold }}</span></h2>
+    <p class="sub">{{ section.settings.text }}</p>
+    <div class="acts">
+      <a class="btn btn-gold" href="{{ wa | strip }}" target="_blank" rel="noopener">{% render 'icon', name: 'whatsapp' %} Consultar por WhatsApp</a>
+      <div class="socials">
+        <a href="{{ settings.instagram }}" target="_blank" rel="noopener">{% render 'icon', name: 'instagram' %} Instagram</a>
+        <a href="{{ settings.tiktok }}" target="_blank" rel="noopener">{% render 'icon', name: 'tiktok' %} TikTok</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Inicio · Encargos",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Imagen de fondo" },
+    { "type": "text", "id": "image_url", "label": "…o link de imagen", "default": "https://images.pexels.com/photos/14585234/pexels-photo-14585234.jpeg?auto=compress&cs=tinysrgb&w=2000" },
+    { "type": "text", "id": "kicker", "label": "Texto superior", "default": "Encargos" },
+    { "type": "text", "id": "title", "label": "Título", "default": "¿Buscás una pieza" },
+    { "type": "text", "id": "title_gold", "label": "Título (parte dorada)", "default": "en particular?" },
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "Contanos cuál, en qué talle, y la buscamos para vos." }
+  ],
+  "presets": [{ "name": "Inicio · Encargos" }]
+}
+{% endschema %}

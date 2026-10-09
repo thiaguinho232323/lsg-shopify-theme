@@ -1,0 +1,8 @@
+{%- capture wa -%}{% render 'wa-url', message: 'Hola LSG. Quería consultar por una pieza.' %}{%- endcapture -%}
+<div class="plain">
+  <p class="kicker">Atención personalizada</p>
+  <h1>Las piezas se adquieren <span class="gold">por WhatsApp.</span></h1>
+  <p>Elegí la pieza que te interesa y escribinos: coordinamos pago y envío con vos.</p>
+  <a class="btn btn-gold" href="{{ wa | strip }}" target="_blank" rel="noopener">{% render 'icon', name: 'whatsapp' %} Escribinos</a>
+</div>
+{% schema %}{ "name": "Carrito", "settings": [] }{% endschema %}

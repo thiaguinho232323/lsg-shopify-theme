@@ -1,0 +1,55 @@
+{%- capture wa -%}{% render 'wa-url', message: 'Hola LSG. Estoy buscando una pieza y quería consultarles.' %}{%- endcapture -%}
+{%- assign disp = 0 -%}
+{%- for p in collections.all.products -%}{%- if p.available -%}{%- assign disp = disp | plus: 1 -%}{%- endif -%}{%- endfor -%}
+{%- capture clips -%}
+  {%- for i in (1..3) -%}
+    {%- assign kd = 'video_' | append: i -%}{%- assign km = 'video_' | append: i | append: '_mobile' -%}
+    {%- if section.settings[kd] != blank -%}{{ section.settings[kd] }}|{{ section.settings[km] | default: section.settings[kd] }};{%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+<section class="hero grain">
+  <div class="hero-media" data-hero-video="{{ clips | strip | escape }}">
+    <video muted playsinline preload="auto" aria-hidden="true"></video>
+    <video muted playsinline preload="auto" aria-hidden="true"></video>
+  </div>
+  <div class="veil veil-1"></div><div class="veil veil-2"></div><div class="veil veil-3"></div>
+
+  <div class="wrap hero-body">
+    <p class="kicker rise" style="animation-delay:300ms">{{ section.settings.kicker }}</p>
+    <span class="hero-line rise" style="animation-delay:500ms" aria-hidden="true"></span>
+    <h1>
+      <span class="rise" style="animation-delay:650ms">{{ section.settings.line_1 }}</span>
+      <span class="rise gold-sheen" style="animation-delay:900ms">{{ section.settings.line_2 }}</span>
+    </h1>
+    <p class="hero-sub rise" style="animation-delay:1150ms">{{ section.settings.sub }}</p>
+    <div class="hero-ctas rise" style="animation-delay:1350ms">
+      <a class="btn btn-gold" href="{{ routes.all_products_collection_url }}">Ver la selección {% render 'icon', name: 'arrow' %}</a>
+      <a class="btn btn-ghost" href="{{ wa | strip }}" target="_blank" rel="noopener">{% render 'icon', name: 'whatsapp' %} Consultar</a>
+    </div>
+  </div>
+
+  <div class="wrap hero-foot">
+    <span><span class="gold">{% if disp < 10 %}0{% endif %}{{ disp }}</span> {% if disp == 1 %}pieza disponible{% else %}piezas disponibles{% endif %}</span>
+    <span class="scroll-l"></span>
+    <span>Precios en USD</span>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Inicio · Video",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Texto superior", "default": "Luxury Selection Gallery · Argentina" },
+    { "type": "text", "id": "line_1", "label": "Frase (línea 1)", "default": "Elegido" },
+    { "type": "text", "id": "line_2", "label": "Frase (línea 2, dorada)", "default": "para pocos." },
+    { "type": "textarea", "id": "sub", "label": "Bajada", "default": "Piezas de diseñador seleccionadas una a una. Originales, únicas y disponibles en Argentina." },
+    { "type": "header", "content": "Videos de fondo (se reproducen en orden)" },
+    { "type": "text", "id": "video_1", "label": "Video 1 (link .mp4, computadora)", "default": "https://videos.pexels.com/video-files/9760427/9760427-hd_1366_720_25fps.mp4" },
+    { "type": "text", "id": "video_1_mobile", "label": "Video 1 (celular)", "default": "https://videos.pexels.com/video-files/9760427/9760427-sd_960_506_25fps.mp4" },
+    { "type": "text", "id": "video_2", "label": "Video 2 (computadora)", "default": "https://videos.pexels.com/video-files/9760434/9760434-hd_1366_720_25fps.mp4" },
+    { "type": "text", "id": "video_2_mobile", "label": "Video 2 (celular)", "default": "https://videos.pexels.com/video-files/9760434/9760434-sd_960_506_25fps.mp4" },
+    { "type": "text", "id": "video_3", "label": "Video 3 (computadora)", "default": "https://videos.pexels.com/video-files/9760626/9760626-hd_1366_720_25fps.mp4" },
+    { "type": "text", "id": "video_3_mobile", "label": "Video 3 (celular)", "default": "https://videos.pexels.com/video-files/9760626/9760626-sd_960_506_25fps.mp4" }
+  ],
+  "presets": [{ "name": "Inicio · Video" }]
+}
+{% endschema %}

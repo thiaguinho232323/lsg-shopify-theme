@@ -1,0 +1,41 @@
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal" data-reveal>
+      <div>
+        <p class="kicker">{{ section.settings.kicker }}</p>
+        <h2 class="title t-xl">{{ section.settings.title }} <span class="gold">{{ section.settings.title_gold }}</span></h2>
+      </div>
+      <a class="see-all link-u" href="{{ routes.all_products_collection_url }}">Ver todas {% render 'icon', name: 'arrow' %}</a>
+    </div>
+  </div>
+  <div class="reveal" data-reveal style="transition-delay:150ms">
+    <div class="rail no-scrollbar">
+      {%- assign shown = 0 -%}
+      {%- for product in collections.all.products -%}
+        {%- assign tags_l = product.tags | join: ',' | downcase -%}
+        {%- if product.available and tags_l contains 'destacada' -%}
+          {%- assign shown = shown | plus: 1 -%}
+          <div class="rail-item">{% render 'piece-card', product: product, sizes: '(max-width: 768px) 72vw, 300px', loading: 'eager' %}</div>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if shown == 0 -%}
+        {%- for product in collections.all.products limit: 8 -%}
+          {%- if product.available -%}<div class="rail-item">{% render 'piece-card', product: product, sizes: '(max-width: 768px) 72vw, 300px', loading: 'eager' %}</div>{%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+      <a class="rail-more" href="{{ routes.all_products_collection_url }}"><span>Toda la<br>selección</span>{% render 'icon', name: 'arrow' %}</a>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Inicio · Destacadas",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Texto superior", "default": "La selección" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Piezas" },
+    { "type": "text", "id": "title_gold", "label": "Título (parte dorada)", "default": "destacadas" },
+    { "type": "paragraph", "content": "Muestra las piezas con la etiqueta 'destacada'." }
+  ],
+  "presets": [{ "name": "Inicio · Destacadas" }]
+}
+{% endschema %}

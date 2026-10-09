@@ -1,0 +1,45 @@
+<section id="nuestra-mirada" class="bg-sec mirada" style="scroll-margin-top:80px">
+  {%- if section.settings.image != blank -%}
+    <div class="bg-img" aria-hidden="true" style="background-image:url('{{ section.settings.image | image_url: width: 2000 }}')"></div>
+  {%- elsif section.settings.image_url != blank -%}
+    <div class="bg-img" aria-hidden="true" style="background-image:url('{{ section.settings.image_url }}')"></div>
+  {%- endif -%}
+  <div class="bg-shade" style="background:rgba(10,10,10,.8)"></div>
+  <div class="bg-fade"></div>
+  <div class="wrap mirada-grid">
+    <div class="reveal" data-reveal>
+      <p class="kicker">{{ section.settings.kicker }}</p>
+      <h2 class="title t-xl">{{ section.settings.title }} <span class="gold">{{ section.settings.title_gold }}</span></h2>
+      <p class="mirada-p">{{ section.settings.text }}</p>
+    </div>
+    <div>
+      {%- for block in section.blocks -%}
+        <div class="princ reveal" data-reveal style="transition-delay:{{ forloop.index0 | times: 120 }}ms" {{ block.shopify_attributes }}>
+          <span class="princ-n">{{ block.settings.n }}</span>
+          <div><h3>{{ block.settings.title }}</h3><p>{{ block.settings.text }}</p></div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Inicio · Nuestra mirada",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Imagen de fondo" },
+    { "type": "text", "id": "image_url", "label": "…o link de imagen", "default": "https://images.pexels.com/photos/20433641/pexels-photo-20433641.jpeg?auto=compress&cs=tinysrgb&w=2000" },
+    { "type": "text", "id": "kicker", "label": "Texto superior", "default": "Nuestra mirada" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Elegimos menos para que cada pieza" },
+    { "type": "text", "id": "title_gold", "label": "Título (parte dorada)", "default": "diga más." },
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "Hace cuatro años que buscamos, revisamos y seleccionamos piezas de diseñador. LSG nace de esa mirada: una selección reducida, donde cada pieza entra porque la elegimos y llega directo a quien la estaba buscando." }
+  ],
+  "blocks": [
+    { "type": "principio", "name": "Principio", "settings": [
+      { "type": "text", "id": "n", "label": "Número", "default": "I" },
+      { "type": "text", "id": "title", "label": "Título" },
+      { "type": "textarea", "id": "text", "label": "Texto" }
+    ] }
+  ],
+  "presets": [{ "name": "Inicio · Nuestra mirada" }]
+}
+{% endschema %}

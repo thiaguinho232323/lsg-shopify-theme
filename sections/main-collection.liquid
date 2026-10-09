@@ -1,0 +1,70 @@
+{%- assign disp = 0 -%}
+{%- for p in collection.products -%}{%- if p.available -%}{%- assign disp = disp | plus: 1 -%}{%- endif -%}{%- endfor -%}
+<div class="col-top">
+  <div class="wrap">
+    <p class="kicker">La selección</p>
+    <div class="col-head">
+      <h1>Piezas <span class="gold">disponibles</span></h1>
+      <p>{{ disp }} {% if disp == 1 %}pieza disponible{% else %}piezas disponibles{% endif %}. Cada una es única y la selección se renueva con cada ingreso.</p>
+    </div>
+  </div>
+</div>
+
+<div data-catalog>
+  <div class="fbar">
+    <div class="wrap fbar-in">
+      <button type="button" class="fbtn" data-open-filters>{% render 'icon', name: 'filter' %} Filtrar <span class="fcount" data-fcount></span></button>
+      <div class="fchips-inline" data-inline-brands></div>
+      <label class="sort"><span class="sr-only">Ordenar</span>
+        <select data-sort>
+          <option value="recientes">Más recientes</option>
+          <option value="precio-asc">Precio: menor a mayor</option>
+          <option value="precio-desc">Precio: mayor a menor</option>
+        </select>{% render 'icon', name: 'chevron' %}
+      </label>
+    </div>
+  </div>
+
+  <div class="wrap col-body">
+    <div class="res-bar">
+      <span><span class="gold" data-count>0</span> <span data-count-label>piezas</span></span>
+      <div class="r">
+        <button type="button" class="link-u hidden" data-clear>Limpiar filtros</button>
+        <button type="button" class="toggle" data-sold-toggle aria-pressed="false"><i></i> Ver vendidas</button>
+      </div>
+    </div>
+
+    {%- paginate collection.products by 250 -%}
+      <div class="grid" data-grid>
+        {%- for product in collection.products -%}
+          {% render 'piece-card', product: product, loading: 'lazy' %}
+        {%- endfor -%}
+      </div>
+    {%- endpaginate -%}
+
+    <div class="empty" data-empty>
+      <p>No hay piezas con esos filtros.</p>
+      <p>Probá con otra combinación o escribinos: quizás podemos conseguirla.</p>
+      <button type="button" class="btn btn-ghost" data-clear-all>Ver todo</button>
+    </div>
+  </div>
+
+  <div class="sheet" data-sheet aria-hidden="true">
+    <div class="sheet-bg" data-close-filters></div>
+    <div class="sheet-panel" role="dialog" aria-label="Filtros">
+      <div class="sheet-h"><span>Filtrar</span><button type="button" data-close-filters aria-label="Cerrar filtros">{% render 'icon', name: 'close' %}</button></div>
+      <div class="sheet-b">
+        <div><p class="kicker">Marca</p><div class="chips" data-group="brand"></div></div>
+        <div><p class="kicker">Categoría</p><div class="chips" data-group="cat"></div></div>
+        <div><p class="kicker">Talle</p><div class="chips" data-group="size"></div></div>
+      </div>
+      <div class="sheet-f">
+        <button type="button" class="btn btn-ghost" data-clear-all>Limpiar</button>
+        <button type="button" class="btn btn-gold" data-close-filters>Ver <span data-count2>0</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{ "name": "Catálogo", "settings": [] }
+{% endschema %}

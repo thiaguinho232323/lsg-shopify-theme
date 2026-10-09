@@ -1,0 +1,18 @@
+<div class="col-top">
+  <div class="wrap">
+    <p class="kicker">Búsqueda</p>
+    <form action="{{ routes.search_url }}" method="get" class="pw" style="margin-top:16px">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Buscar piezas" aria-label="Buscar">
+      <input type="hidden" name="type" value="product">
+    </form>
+  </div>
+</div>
+<div class="wrap col-body">
+  {%- if search.performed -%}
+    <div class="grid">
+      {%- for item in search.results -%}{%- if item.object_type == 'product' -%}{% render 'piece-card', product: item, loading: 'lazy' %}{%- endif -%}{%- endfor -%}
+    </div>
+    {%- if search.results_count == 0 -%}<p class="muted">No encontramos piezas para "{{ search.terms }}".</p>{%- endif -%}
+  {%- endif -%}
+</div>
+{% schema %}{ "name": "Búsqueda", "settings": [] }{% endschema %}

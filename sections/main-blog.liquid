@@ -1,0 +1,5 @@
+<div class="page-rte">
+  <h1>{{ blog.title }}</h1>
+  {%- for article in blog.articles -%}<p style="margin-top:24px"><a class="link-u" href="{{ article.url }}">{{ article.title }}</a></p>{%- endfor -%}
+</div>
+{% schema %}{ "name": "Blog", "settings": [] }{% endschema %}

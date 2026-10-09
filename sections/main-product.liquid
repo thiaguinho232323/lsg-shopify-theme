@@ -29,7 +29,7 @@
 {%- capture wa -%}{% render 'wa-url', message: msg %}{%- endcapture -%}
 {%- assign cond_l = p_cond | downcase -%}
 {%- case cond_l -%}
-  {%- when 'ds' -%}{%- assign cond_note = 'Deadstock: nueva, sin uso.' -%}
+  {%- when 'new' -%}{%- assign cond_note = 'Nueva: sin uso, con sus etiquetas o en su caja original.' -%}{%- when 'vnds' -%}{%- assign cond_note = 'Igual a nueva: usada apenas, sin marcas ni detalles visibles.' -%}{%- when 'used' -%}{%- assign cond_note = 'Usada, en excelente estado. Revisada en detalle y fotografiada tal cual es.' -%}{%- when 'ds' -%}{%- assign cond_note = 'Deadstock: nueva, sin uso.' -%}
   {%- when 'nueva' -%}{%- assign cond_note = 'Sin uso, con etiquetas o en su caja original.' -%}
   {%- when 'impecable' -%}{%- assign cond_note = 'Usada muy pocas veces. Sin detalles visibles.' -%}
   {%- when 'con uso' -%}{%- assign cond_note = 'Uso visible y honesto. Consultanos por fotos de detalle.' -%}
@@ -94,7 +94,7 @@
             {%- if p_cond != '' -%}<div><dt>Condición</dt><dd>{{ p_cond }}</dd></div>{%- endif -%}
             {%- if product.type != blank -%}<div><dt>Categoría</dt><dd>{{ product.type }}</dd></div>{%- endif -%}
           </dl>
-          {%- if cond_note != '' -%}<p class="cond-note">{{ cond_note }}</p>{%- endif -%}
+          {%- if cond_note != '' -%}<p class="cond-note">{{ cond_note }}</p><a class="cond-link link-u" href="{{ routes.root_url }}#glosario">Glosario de estados</a>{%- endif -%}
           <a class="btn btn-gold wa-desk" href="{{ wa | strip }}" target="_blank" rel="noopener">{% render 'icon', name: 'whatsapp' %} {% if p_vendida %}Consultar por algo similar{% else %}Consultar por WhatsApp{% endif %}</a>
           {%- if p_reservada -%}<p class="res-note">Esta pieza está reservada. Escribinos para quedar en lista de espera.</p>{%- endif -%}
           {%- if product.description != blank -%}

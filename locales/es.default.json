@@ -1,0 +1,9 @@
+{
+  "general": {
+    "password_page": {
+      "login_form_heading": "Entrar con contraseña",
+      "login_form_password_label": "Contraseña",
+      "login_form_submit": "Entrar"
+    }
+  }
+}

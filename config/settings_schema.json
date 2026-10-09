@@ -1,0 +1,19 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "LSG",
+    "theme_version": "1.0.0",
+    "theme_author": "Luxury Selection Gallery",
+    "theme_documentation_url": "https://lsg-web.vercel.app",
+    "theme_support_url": "https://lsg-web.vercel.app"
+  },
+  {
+    "name": "Contacto y redes",
+    "settings": [
+      { "type": "text", "id": "whatsapp", "label": "WhatsApp (solo números, con 549)", "default": "5491135072796" },
+      { "type": "url", "id": "instagram", "label": "Instagram", "default": "https://www.instagram.com/lsg" },
+      { "type": "url", "id": "tiktok", "label": "TikTok", "default": "https://www.tiktok.com/@lsg" },
+      { "type": "text", "id": "handle", "label": "Usuario de redes", "default": "@lsg" }
+    ]
+  }
+]

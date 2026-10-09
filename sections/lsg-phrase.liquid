@@ -1,15 +1,24 @@
-<section class="sec phrase">
+<section class="bg-sec phrase">
+  {%- if section.settings.image != blank -%}
+  <div class="bg-img" aria-hidden="true" style="background-image:url('{{ section.settings.image | image_url: width: 2000 }}')"></div>
+  {%- elsif section.settings.image_url != blank -%}
+  <div class="bg-img" aria-hidden="true" style="background-image:url('{{ section.settings.image_url }}')"></div>
+  {%- endif -%}
+  <div class="bg-shade"></div>
   <div class="center reveal" data-reveal style="max-width:56rem">
-    <p>{{ section.settings.line_1 }}<br><span class="gold">{{ section.settings.line_2 }}</span></p>
+  <p>{{ section.settings.line_1 }}<br><span class="gold">{{ section.settings.line_2 }}</span></p>
   </div>
-</section>
-{% schema %}
-{
+  </section>
+  {% schema %}
+  {
   "name": "Inicio · Frase",
   "settings": [
-    { "type": "text", "id": "line_1", "label": "Línea 1", "default": "Cada pieza fue elegida." },
-    { "type": "text", "id": "line_2", "label": "Línea 2 (dorada)", "default": "Ninguna está por casualidad." }
+  { "type": "text", "id": "line_1", "label": "Línea 1", "default": "Cada pieza fue elegida." },
+  { "type": "text", "id": "line_2", "label": "Línea 2 (dorada)", "default": "Ninguna está por casualidad." },
+  { "type": "image_picker", "id": "image", "label": "Foto de fondo" },
+  { "type": "text", "id": "image_url", "label": "Foto de fondo (URL)", "default": "https://images.pexels.com/photos/28251205/pexels-photo-28251205.jpeg?auto=compress&cs=tinysrgb&w=2000" }
   ],
   "presets": [{ "name": "Inicio · Frase" }]
-}
-{% endschema %}
+  }
+  {% endschema %}
+  

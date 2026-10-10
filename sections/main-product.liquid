@@ -19,7 +19,7 @@
 {%- assign p_talle = '' -%}
 {%- for option in product.options_with_values -%}
   {%- assign on = option.name | downcase -%}
-  {%- if on contains 'talle' or on contains 'size' -%}{%- assign p_talle = option.values | join: ' / ' -%}{%- endif -%}
+  {%- if on contains 'talle' or on contains 'talla' or on contains 'size' -%}{%- assign p_talle = option.values | join: ' / ' -%}{%- endif -%}
 {%- endfor -%}
 {%- if p_talle == '' -%}{%- assign p_talle = 'Único' -%}{%- endif -%}
 {%- capture msg -%}

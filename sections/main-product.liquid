@@ -94,7 +94,7 @@
             {%- if p_cond != '' -%}<div><dt>Condición</dt><dd>{{ p_cond }}</dd></div>{%- endif -%}
             {%- if product.type != blank -%}<div><dt>Categoría</dt><dd>{{ product.type }}</dd></div>{%- endif -%}
           </dl>
-          {%- if cond_note != '' -%}<p class="cond-note">{{ cond_note }}</p><a class="cond-link link-u" href="{{ routes.root_url }}#glosario">Glosario de estados</a>{%- endif -%}
+          {%- if cond_note != '' -%}<p class="cond-note">{{ cond_note }}</p><a class="cond-link link-u" target="_blank" rel="noopener" href="{{ routes.root_url }}#glosario">Glosario de estados</a>{%- endif -%}
           <a class="btn btn-gold wa-desk" href="{{ wa | strip }}" target="_blank" rel="noopener">{% render 'icon', name: 'whatsapp' %} {% if p_vendida %}Consultar por algo similar{% else %}Consultar por WhatsApp{% endif %}</a>
           {%- if p_reservada -%}<p class="res-note">Esta pieza está reservada. Escribinos para quedar en lista de espera.</p>{%- endif -%}
           {%- if product.description != blank -%}

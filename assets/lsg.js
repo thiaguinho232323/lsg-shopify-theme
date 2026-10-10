@@ -137,7 +137,7 @@
         if (state.sort === 'precio-desc') return b.dataset.price - a.dataset.price;
         return (b.dataset.num || 0) - (a.dataset.num || 0);
       });
-      sorted.forEach(function (c) { grid.appendChild(c); c.classList.toggle('hidden', visible.indexOf(c) === -1); });
+      sorted.forEach(function (c) { grid.appendChild(c); c.classList.toggle('hidden', visible.indexOf(c) === -1); }); var sh = $('[data-sold-head]', cat); if (sh) { var fs = sorted.filter(function (c) { return c.dataset.sold === 'true' && visible.indexOf(c) > -1; })[0]; if (fs) { grid.insertBefore(sh, fs); sh.classList.remove('hidden'); } else { sh.classList.add('hidden'); } }
       var n = visible.length;
       $('[data-count]', cat).textContent = n;
       $('[data-count2]', cat).textContent = n;

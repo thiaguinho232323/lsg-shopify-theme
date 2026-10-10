@@ -96,7 +96,7 @@
           </dl>
           {%- if cond_note != '' -%}<p class="cond-note">{{ cond_note }}</p><a class="cond-link link-u" target="_blank" rel="noopener" href="{{ routes.root_url }}#glosario">Glosario de estados</a>{%- endif -%}
           <a class="btn btn-gold wa-desk" href="{{ wa | strip }}" target="_blank" rel="noopener">{% render 'icon', name: 'whatsapp' %} {% if p_vendida %}Consultar por algo similar{% else %}Consultar por WhatsApp{% endif %}</a>
-          {%- if p_reservada -%}<p class="res-note">Esta pieza está reservada. Escribinos para quedar en lista de espera.</p>{%- endif -%}
+          {%- if p_vendida -%}<p class="res-note">Esta pieza ya se vendió. Podemos conseguirla por encargo: <a class="link-u" href="{{ routes.root_url }}#encargos">pedila acá</a>.</p>{%- endif -%}{%- if p_reservada -%}<p class="res-note">Esta pieza está reservada. Escribinos para quedar en lista de espera.</p>{%- endif -%}
           {%- if product.description != blank -%}
             <div class="desc"><span class="kicker">Sobre la pieza</span><div class="rte">{{ product.description }}</div></div>
           {%- endif -%}

@@ -74,7 +74,7 @@
   if (cat) {
     var cards = $$('[data-card]', cat);
     var grid = $('[data-grid]', cat);
-    var state = { brand: [], cat: [], size: [], sold: false, sort: 'recientes' };
+    var state = { brand: [], cat: [], size: [], sold: true, sort: 'recientes' };
     var params = new URLSearchParams(location.search);
     if (params.get('marca')) state.brand = [params.get('marca')];
 

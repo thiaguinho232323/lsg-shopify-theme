@@ -1,5 +1,5 @@
 {%- capture wa -%}{% render 'wa-url', message: 'Hola LSG. Estoy buscando una pieza y quería consultarles.' %}{%- endcapture -%}
-<section class="bg-sec encargos">
+<section id="encargos" class="bg-sec encargos" style="scroll-margin-top:60px">
   {%- if section.settings.image != blank -%}
     <div class="bg-img" aria-hidden="true" style="background-image:url('{{ section.settings.image | image_url: width: 2000 }}')"></div>
   {%- elsif section.settings.image_url != blank -%}

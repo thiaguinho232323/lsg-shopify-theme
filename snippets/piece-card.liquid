@@ -21,6 +21,12 @@
   {%- assign on = option.name | downcase -%}
   {%- if on contains 'talle' or on contains 'talla' or on contains 'size' -%}{%- assign p_talle = option.values | join: ' / ' -%}{%- endif -%}
 {%- endfor -%}
+{%- comment -%} Si no hay variante de talle, usa el metacampo de categoría Talla {%- endcomment -%}
+{%- if p_talle == '' -%}
+  {%- for s in product.metafields.shopify.size.value -%}
+    {%- if forloop.first -%}{%- assign p_talle = s.label -%}{%- else -%}{%- assign p_talle = p_talle | append: ' / ' | append: s.label -%}{%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
 {%- if p_talle == '' -%}{%- assign p_talle = 'Único' -%}{%- endif -%}
 {%- assign img1 = product.featured_image -%}
 {%- assign img2 = product.images[1] -%}

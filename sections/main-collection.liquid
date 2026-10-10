@@ -35,7 +35,7 @@
     </div>
 
     {%- paginate collection.products by 250 -%}
-      <div class="grid" data-grid>
+      <div class="grid" data-grid><div class="sold-head hidden" data-sold-head><p class="kicker">Ya vendidas</p><h2 class="title">Piezas que ya <span class="gold">encontraron dueño</span></h2><p class="sub">¿Te gustó alguna? Podemos conseguirla por encargo: contanos cuál y la buscamos para vos.</p><a class="link-u" href="{{ routes.root_url }}#encargos">Pedir por encargo</a></div>
         {%- for product in collection.products -%}
           {% render 'piece-card', product: product, loading: 'lazy' %}
         {%- endfor -%}

@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="reveal" data-reveal style="transition-delay:150ms">
-    <div class="rail no-scrollbar">
+    <div class="rail rail-grid no-scrollbar">
       {%- assign shown = 0 -%}
       {%- for product in collections.all.products -%}
         {%- assign tags_l = product.tags | join: ',' | downcase -%}

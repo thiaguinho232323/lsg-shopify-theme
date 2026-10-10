@@ -48,7 +48,7 @@
     <h3>{{ product.title }}</h3>
     <div class="card-foot">
       <span class="p">{% render 'usd', amount: product.price %}</span>
-      <span class="t">{% if p_talle == 'Único' %}Talle único{% else %}Talle {{ p_talle }}{% endif %}</span>
+      <span class="t">{% if p_talle == 'Único' %}Talle único{% else %}Talle {{ p_talle }}{% endif %}</span>{%- if p_vendida -%}<span class="sold-note">Vendida · <b>Pedila por encargo →</b></span>{%- endif -%}
     </div>
   </div>
 </a>

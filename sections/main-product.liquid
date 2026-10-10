@@ -21,6 +21,12 @@
   {%- assign on = option.name | downcase -%}
   {%- if on contains 'talle' or on contains 'talla' or on contains 'size' -%}{%- assign p_talle = option.values | join: ' / ' -%}{%- endif -%}
 {%- endfor -%}
+{%- comment -%} Si no hay variante de talle, usa el metacampo de categoría Talla {%- endcomment -%}
+{%- if p_talle == '' -%}
+  {%- for s in product.metafields.shopify.size.value -%}
+    {%- if forloop.first -%}{%- assign p_talle = s.label -%}{%- else -%}{%- assign p_talle = p_talle | append: ' / ' | append: s.label -%}{%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
 {%- if p_talle == '' -%}{%- assign p_talle = 'Único' -%}{%- endif -%}
 {%- capture msg -%}
   {%- if p_vendida -%}Hola LSG. Vi la pieza {{ p_num_label }} — {{ product.vendor }} {{ product.title }}, que ya no está disponible. ¿Tienen algo similar?

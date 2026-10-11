@@ -29,7 +29,7 @@
 {%- endif -%}
 {%- if p_talle == '' -%}{%- assign p_talle = 'Único' -%}{%- endif -%}
 {%- capture msg -%}
-  {%- if p_vendida -%}Hola LSG. Vi la pieza {{ p_num_label }} — {{ product.vendor }} {{ product.title }}, que ya no está disponible. ¿Tienen algo similar?
+  {%- if p_vendida -%}Hola LSG. Vi la pieza {% if p_num_label != '' %}{{ p_num_label }} — {% endif %}{{ product.vendor }} {{ product.title }}{% if p_talle != 'Único' %} (talle {{ p_talle }}){% endif %}, que ya se vendió. Me gustaría encargarla.
   {%- else -%}Hola LSG. Me interesa la pieza {% if p_num_label != '' %}{{ p_num_label }} — {% endif %}{{ product.vendor }} {{ product.title }}{% if p_talle != 'Único' %} (talle {{ p_talle }}){% endif %}. ¿Sigue disponible?{%- endif -%}
 {%- endcapture -%}
 {%- capture wa -%}{% render 'wa-url', message: msg %}{%- endcapture -%}
@@ -69,7 +69,7 @@
                 </button>
               {%- endfor -%}
             </div>
-            {%- if p_badge != '' and p_vendida == false -%}<span class="badge">{{ p_badge }}</span>{%- endif -%}
+            {%- if p_vendida -%}<span class="badge badge-sold">Vendida</span>{%- elsif p_badge != '' -%}<span class="badge">{{ p_badge }}</span>{%- endif -%}
             {%- if product.images.size > 1 -%}
               <div class="dots">{%- for img in product.images -%}<i class="{% if forloop.first %}on{% endif %}"></i>{%- endfor -%}</div>
             {%- endif -%}
@@ -93,16 +93,17 @@
           </div>
           <p class="brand">{{ product.vendor }}</p>
           <h1>{{ product.title }}</h1>
-          <p class="price">{% render 'usd', amount: product.price %}</p>
-          <p class="price-note">Precio en dólares. Consultanos por pago en pesos.</p>
+          {%- if p_vendida -%}{%- if product.price > 0 -%}<p class="price">{% render 'usd', amount: product.price %}</p>{%- endif -%}
+          <p class="price-note">Pieza vendida. La conseguimos por encargo.</p>{%- else -%}<p class="price">{% render 'usd', amount: product.price %}</p>
+          <p class="price-note">Precio en dólares. Consultanos por pago en pesos.</p>{%- endif -%}
           <dl class="specs">
             <div><dt>Talle</dt><dd>{{ p_talle }}</dd></div>
             {%- if p_cond != '' -%}<div><dt>Condición</dt><dd>{{ p_cond }}</dd></div>{%- endif -%}
             {%- if product.type != blank -%}<div><dt>Categoría</dt><dd>{{ product.type }}</dd></div>{%- endif -%}
           </dl>
           {%- if cond_note != '' -%}<p class="cond-note">{{ cond_note }}</p><button type="button" class="cond-link link-u" onclick="document.getElementById('glos-dlg').showModal()">Glosario de estados</button><dialog id="glos-dlg" class="glos-dlg" aria-label="Glosario de estados" onclick="if(event.target===this)this.close()"><div class="gd-in"><div class="gd-h"><p class="kicker">Glosario de estados</p><button type="button" class="gd-x" aria-label="Cerrar" onclick="this.closest('dialog').close()">✕</button></div><dl class="gd-list"><div><dt><span class="gd-code">NEW · DS</span><span class="gd-name">Nueva</span></dt><dd>Sin uso. Con sus etiquetas o en su caja original, tal como salió de la casa. DS (Deadstock) significa lo mismo.</dd></div><div><dt><span class="gd-code">VNDS</span><span class="gd-name">Igual a nueva</span></dt><dd>Very Near Deadstock. Usada apenas un par de veces. Sin marcas, sin detalles visibles: a la vista y al tacto, nueva.</dd></div><div><dt><span class="gd-code">USED</span><span class="gd-name">Usada · excelente estado</span></dt><dd>Con historia propia y en condiciones impecables. Revisada en detalle y fotografiada tal cual es.</dd></div></dl></div></dialog>{%- endif -%}
-          <a class="btn btn-gold wa-desk" href="{{ wa | strip }}" target="_blank" rel="noopener">{% render 'icon', name: 'whatsapp' %} {% if p_vendida %}Consultar por algo similar{% else %}Consultar por WhatsApp{% endif %}</a>
-          {%- if p_vendida -%}<p class="res-note">Esta pieza ya se vendió. Podemos conseguirla por encargo: <a class="link-u" href="{{ routes.root_url }}#encargos">pedila acá</a>.</p>{%- endif -%}{%- if p_reservada -%}<p class="res-note">Esta pieza está reservada. Escribinos para quedar en lista de espera.</p>{%- endif -%}
+          <a class="btn btn-gold wa-desk" href="{{ wa | strip }}" target="_blank" rel="noopener">{% render 'icon', name: 'whatsapp' %} {% if p_vendida %}Encargar{% else %}Consultar por WhatsApp{% endif %}</a>
+          {%- if p_vendida -%}<p class="res-note">Esta pieza ya se vendió, pero podemos conseguirte una igual por encargo. Escribinos y la buscamos.</p>{%- endif -%}{%- if p_reservada -%}<p class="res-note">Esta pieza está reservada. Escribinos para quedar en lista de espera.</p>{%- endif -%}
           {%- if product.description != blank -%}
             <div class="desc"><span class="kicker">Sobre la pieza</span><div class="rte">{{ product.description }}</div></div>
           {%- endif -%}
@@ -133,8 +134,8 @@
 
 <div class="mbar">
   <div class="mbar-in">
-    <div style="min-width:0"><p class="b">{{ product.vendor }}</p><p class="p">{% render 'usd', amount: product.price %}</p></div>
-    <a class="btn btn-gold" href="{{ wa | strip }}" target="_blank" rel="noopener">{% render 'icon', name: 'whatsapp' %} {% if p_vendida %}Algo similar{% else %}Consultar{% endif %}</a>
+    <div style="min-width:0"><p class="b">{{ product.vendor }}</p><p class="p">{% if p_vendida %}Vendida{% else %}{% render 'usd', amount: product.price %}{% endif %}</p></div>
+    <a class="btn btn-gold" href="{{ wa | strip }}" target="_blank" rel="noopener">{% render 'icon', name: 'whatsapp' %} {% if p_vendida %}Encargar{% else %}Consultar{% endif %}</a>
   </div>
 </div>
 <div class="mbar-space"></div>

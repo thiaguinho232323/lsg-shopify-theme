@@ -31,7 +31,7 @@
 {%- assign img1 = product.featured_image -%}
 {%- assign img2 = product.images[1] -%}
 {%- if sizes == blank -%}{%- assign sizes = '(max-width: 768px) 50vw, 25vw' -%}{%- endif -%}
-<a href="{% if p_vendida %}{{ routes.root_url }}#encargos{% else %}{{ product.url }}{% endif %}" class="card{% if p_vendida %} is-sold{% endif %}"
+<a href="{{ product.url }}" class="card{% if p_vendida %} is-sold{% endif %}"
    data-card
    data-brand="{{ product.vendor | escape }}"
    data-cat="{{ product.type | escape }}"

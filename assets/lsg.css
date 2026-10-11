@@ -303,7 +303,7 @@ ul { padding: 0; list-style: none; }
 .track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }
 .track button { position: relative; flex: 0 0 100%; aspect-ratio: 4/5; scroll-snap-align: center; cursor: zoom-in; background: var(--carbon); }
 .track img { width: 100%; height: 100%; object-fit: cover; }
-.is-sold .track img { opacity: .5; filter: grayscale(1); }
+.gal-main .badge.badge-sold { background: var(--ivory); border-color: var(--ivory); color: #fff; }
 .gal-main .badge { left: 16px; top: 16px; padding: 6px 10px; font-size: 9px; letter-spacing: .25em; pointer-events: none; }
 .dots { position: absolute; left: 0; right: 0; bottom: 16px; display: flex; justify-content: center; gap: 8px; pointer-events: none; }
 .dots i { height: 1px; width: 16px; background: rgba(17,17,17,.4); transition: all .5s; }

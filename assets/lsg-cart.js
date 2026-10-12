@@ -24,6 +24,7 @@
     '.lsgc-sizes button:hover{border-color:#9c7a3c;color:#9c7a3c}',
     '.lsgc-sizes button[disabled]{opacity:.35;cursor:not-allowed;text-decoration:line-through}',
     '.lsgc-pdp{margin-bottom:12px;width:100%;display:flex;align-items:center;justify-content:center;gap:12px;padding:16px 32px;border:1px solid #111;background:#111;color:#fff;font:500 10.5px/1 Jost,system-ui,sans-serif;letter-spacing:.32em;text-transform:uppercase;cursor:pointer;transition:background .3s,color .3s}',
+    '.lsgc-pdp-wrap{margin-top:28px}.lsgc-pdp-wrap + .wa-desk{margin-top:0}',
     '.lsgc-pdp:hover{background:#fff;color:#111}',
     '.lsgc-pdp svg{width:14px;height:14px}',
     '.lsgc-pdp-sizes{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}',

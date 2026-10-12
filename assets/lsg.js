@@ -139,7 +139,7 @@
       });
       sorted.forEach(function (c) { grid.appendChild(c); c.classList.toggle('hidden', visible.indexOf(c) === -1); }); var sh = $('[data-sold-head]', cat); if (sh) { var fs = sorted.filter(function (c) { return c.dataset.sold === 'true' && visible.indexOf(c) > -1; })[0]; if (fs) { grid.insertBefore(sh, fs); sh.classList.remove('hidden'); } else { sh.classList.add('hidden'); } }
       var n = visible.length;
-      $('[data-count]', cat).textContent = n;
+      var na = visible.filter(function (c) { return c.dataset.sold !== 'true'; }).length; $('[data-count]', cat).textContent = na;
       $('[data-count2]', cat).textContent = n;
       $('[data-count-label]', cat).textContent = n === 1 ? 'pieza' : 'piezas';
       $('[data-empty]', cat).classList.toggle('on', n === 0);

@@ -10,7 +10,7 @@
     <div class="glos-list">
     {%- for block in section.blocks -%}
     <div class="glos-row reveal" data-reveal style="transition-delay:{{ forloop.index0 | times: 120 }}ms" {{ block.shopify_attributes }}>
-    <span class="glos-code">{{ block.settings.code }}</span>
+    <span class="glos-code">{{ block.settings.code }}{%- if block.settings.alias != blank -%}<span class="glos-alt">{{ block.settings.alias }}</span>{%- endif -%}</span>
     <div><span class="glos-name">{{ block.settings.name }}</span>{%- if block.settings.full != blank -%}<span class="glos-full">{{ block.settings.full }}</span>{%- endif -%}</div>
     <p class="glos-text">{{ block.settings.text }}</p>
     </div>
@@ -29,7 +29,7 @@
     ],
     "blocks": [
     { "type": "term", "name": "Término", "settings": [
-    { "type": "text", "id": "code", "label": "Sigla", "default": "NEW" },
+    { "type": "text", "id": "code", "label": "Sigla", "default": "NEW" }, { "type": "text", "id": "alias", "label": "Sigla equivalente (opcional)" },
     { "type": "text", "id": "name", "label": "Nombre", "default": "Nueva" },
     { "type": "text", "id": "full", "label": "Significado de la sigla" },
     { "type": "textarea", "id": "text", "label": "Descripción" }
@@ -37,9 +37,9 @@
     ],
     "presets": [
     { "name": "Glosario", "blocks": [
-    { "type": "term", "settings": { "code": "NEW", "name": "Nueva", "text": "Sin uso. Con sus etiquetas o en su caja original, tal como salió de la casa." } },
-    { "type": "term", "settings": { "code": "VNDS", "name": "Igual a nueva", "full": "Very Near Deadstock", "text": "Usada apenas un par de veces. Sin marcas, sin detalles visibles: a la vista y al tacto, nueva." } },
-    { "type": "term", "settings": { "code": "USED", "name": "Usada · excelente estado", "text": "Con historia propia y en condiciones impecables. Revisada en detalle y fotografiada tal cual es." } }
+    { "type": "term", "settings": { "code": "NEW", "alias": "DS", "name": "Nueva", "full": "Deadstock", "text": "Sin uso. Con sus etiquetas o en su caja original, tal como salió de la casa." } },
+    { "type": "term", "settings": { "code": "VNDS", "name": "Igual a nueva", "full": "Very Near Deadstock", "text": "Entre 2 y 3 usos, sin marcas ni detalles visibles. A la vista y al tacto, está igual a nueva." } },
+    { "type": "term", "settings": { "code": "USED", "name": "Usada · excelente estado", "full": "Pre-owned", "text": "Con uso y en excelente estado, revisada en detalle. Escribinos por WhatsApp y te mostramos su condición real." } }
     ] }
     ]
     }

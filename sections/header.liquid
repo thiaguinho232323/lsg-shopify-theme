@@ -1,7 +1,7 @@
 {%- capture wa -%}{% render 'wa-url', message: 'Hola LSG. Estoy buscando una pieza y quería consultarles.' %}{%- endcapture -%}
 <header class="hdr" data-hdr>
   <div class="wrap hdr-in">
-    <a href="{{ routes.root_url }}" aria-label="LSG — Inicio">{% render 'monogram' %}</a>
+    <a href="{{ routes.root_url }}" aria-label="LSG — Inicio"><span class="lsg-wm">Luxury Selection <em>Gallery</em></span></a>
     <nav class="nav">
       <a class="link-u" href="{{ routes.all_products_collection_url }}">Selección</a>
       <a class="link-u" href="{{ routes.root_url }}#marcas">Marcas</a>

@@ -9,7 +9,7 @@
  */
 {
   "sections": {
-    "glosario": { "type": "lsg-glosario", "settings": {}, "blocks": { "t1": { "type": "term", "settings": { "code": "NEW", "name": "Nueva", "text": "Sin uso. Con sus etiquetas o en su caja original, tal como salió de la casa." } }, "t2": { "type": "term", "settings": { "code": "VNDS", "name": "Igual a nueva", "full": "Very Near Deadstock", "text": "Usada apenas un par de veces. Sin marcas, sin detalles visibles: a la vista y al tacto, nueva." } }, "t3": { "type": "term", "settings": { "code": "USED", "name": "Usada · excelente estado", "text": "Con historia propia y en condiciones impecables. Revisada en detalle y fotografiada tal cual es." } } }, "block_order": ["t1", "t2", "t3"] },
+    "glosario": { "type": "lsg-glosario", "settings": {}, "blocks": { "t1": { "type": "term", "settings": { "code": "NEW", "alias": "DS", "name": "Nueva", "full": "Deadstock", "text": "Sin uso. Con sus etiquetas o en su caja original, tal como salió de la casa." } }, "t2": { "type": "term", "settings": { "code": "VNDS", "name": "Igual a nueva", "full": "Very Near Deadstock", "text": "Entre 2 y 3 usos, sin marcas ni detalles visibles. A la vista y al tacto, está igual a nueva." } }, "t3": { "type": "term", "settings": { "code": "USED", "name": "Usada · excelente estado", "full": "Pre-owned", "text": "Con uso y en excelente estado, revisada en detalle. Escribinos por WhatsApp y te mostramos su condición real." } } }, "block_order": ["t1", "t2", "t3"] },
     "hero": {
       "type": "lsg-hero",
       "settings": {}

@@ -47,7 +47,7 @@
       {{ img2 | image_url: width: 900 | image_tag: class: 'i2', loading: 'lazy', sizes: sizes, widths: '360, 540, 720, 900', alt: '' }}
     {%- endif -%}
     {%- if p_badge != '' and p_vendida == false -%}<span class="badge">{{ p_badge }}</span>{%- endif -%}
-    {%- if p_vendida -%}<span class="state">Vendida</span>{%- elsif p_reservada -%}<span class="state">Reservada</span>{%- endif -%}
+    {%- if p_vendida -%}<span class="state">Vendida</span>{%- elsif p_reservada -%}<span class="state">Reservada</span>{%- elsif p_cond != '' -%}{%- assign pc = p_cond | upcase -%}<span class="state cond">{%- case pc -%}{%- when 'DS' or 'NEW' -%}Nueva{%- when 'VNDS' -%}Como nueva{%- when 'USED' -%}Usada{%- else -%}{{ p_cond }}{%- endcase -%}</span>{%- endif -%}
   </div>
   <div class="card-meta">
     <div class="card-row"><span class="b">{{ product.vendor }}</span><span class="n">{{ p_num_label }}</span></div>

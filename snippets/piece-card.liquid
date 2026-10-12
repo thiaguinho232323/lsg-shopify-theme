@@ -51,7 +51,7 @@
   </div>
   <div class="card-meta">
     <div class="card-row"><span class="b">{{ product.vendor }}</span><span class="n">{{ p_num_label }}</span></div>
-    <h3>{{ product.title }}</h3>
+    <h3>{{ product.title | remove_first: product.vendor | strip }}</h3>
     <div class="card-foot">
       <span class="p">{% render 'usd', amount: product.price %}</span>
       <span class="t">{% if p_talle == 'Único' %}Talle único{% else %}Talle {{ p_talle }}{% endif %}</span>{%- if p_vendida -%}<span class="sold-note">Vendida · <b>Pedila por encargo →</b></span>{%- endif -%}

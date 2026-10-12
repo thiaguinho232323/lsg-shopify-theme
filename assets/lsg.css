@@ -435,6 +435,8 @@ body:has(.hero) .hdr:not(.is-solid) .nav a{color:rgba(237,232,223,.8);}
 
 /* Fotos de producto parejas (ver lsg.js) */
 .card-img img.is-norm{object-fit:contain;transform-origin:0 0;transform:translate(var(--nx),var(--ny)) scale(var(--ns))}
-.card:hover .card-img img.i1.is-norm{transform:translate(var(--hx),var(--hy)) scale(calc(var(--ns) * 1.04))}
+.card:hover .card-img img.i1.is-norm{transform:translate(var(--hx),var(--hy)) scale(calc(var(--ns) * 1.04))}n de la pieza en la tarjeta */
+.state.cond{background:rgba(255,255,255,.75);border:1px solid rgba(17,17,17,.15);color:#111;backdrop-filter:blur(4px)}
+
 .card-img img.is-white{mix-blend-mode:multiply;filter:brightness(var(--nb,1))}
 .card.is-sold .card-img img.is-white{filter:grayscale(1) brightness(var(--nb,1))}

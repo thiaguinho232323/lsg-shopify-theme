@@ -141,7 +141,7 @@
       var n = visible.length;
       var na = visible.filter(function (c) { return c.dataset.sold !== 'true'; }).length; $('[data-count]', cat).textContent = na;
       $('[data-count2]', cat).textContent = n;
-      $('[data-count-label]', cat).textContent = n === 1 ? 'pieza' : 'piezas';
+      $('[data-count-label]', cat).textContent = na === 1 ? 'pieza disponible' : 'piezas disponibles';
       $('[data-empty]', cat).classList.toggle('on', n === 0);
       var active = state.brand.length + state.cat.length + state.size.length;
       var fc = $('[data-fcount]', cat); fc.textContent = active; fc.classList.toggle('on', active > 0);

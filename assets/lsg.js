@@ -206,3 +206,66 @@
     });
   }
 })();
+
+/* ---------- Fotos de producto parejas: mismo tamaño, altura y fondo ---------- */
+(function () {
+var TW = 0.80, TH = 0.56;   // espacio máximo de la tarjeta que ocupa la prenda (ancho / alto)
+var CA = 4 / 5;             // proporción de la tarjeta
+function analyze(img) {
+if (img.dataset.norm) return;
+var src = img.getAttribute('src');
+if (!src || !window.createImageBitmap) return;
+img.dataset.norm = '1';
+fetch(src.split('?')[0] + '?width=240').then(function (r) { return r.blob(); }).then(createImageBitmap).then(function (bm) {
+var W = bm.width, H = bm.height, c = document.createElement('canvas');
+c.width = W; c.height = H;
+var x = c.getContext('2d');
+x.fillStyle = '#fff'; x.fillRect(0, 0, W, H); x.drawImage(bm, 0, 0);
+var d = x.getImageData(0, 0, W, H).data;
+var px = function (i, y) { var k = (y * W + i) * 4; return [d[k], d[k + 1], d[k + 2]]; };
+var cs = [px(1, 1), px(W - 2, 1), px(1, H - 2), px(W - 2, H - 2)];
+var plain = cs.every(function (q) { return Math.abs(q[0] - 246) < 5 && Math.abs(q[1] - 245) < 5 && Math.abs(q[2] - 243) < 5; });
+var lo = Math.min.apply(null, cs.map(function (q) { return Math.min(q[0], q[1], q[2]); }));
+var white = !plain && lo > 200;   /* fondo blanco o gris claro: se funde con el fondo de la tarjeta */
+/* fondo = lo conectado al borde con cambios suaves de color */
+var seen = new Uint8Array(W * H), st = [], p, q, i, nb;
+var diff = function (a, b) { a *= 4; b *= 4; return Math.abs(d[a] - d[b]) + Math.abs(d[a + 1] - d[b + 1]) + Math.abs(d[a + 2] - d[b + 2]); };
+for (i = 0; i < W; i++) { seen[i] = seen[(H - 1) * W + i] = 1; st.push(i, (H - 1) * W + i); }
+for (i = 0; i < H; i++) { seen[i * W] = seen[i * W + W - 1] = 1; st.push(i * W, i * W + W - 1); }
+while (st.length) {
+p = st.pop();
+nb = [p % W ? p - 1 : -1, (p + 1) % W ? p + 1 : -1, p - W, p + W];
+for (i = 0; i < 4; i++) { q = nb[i]; if (q >= 0 && q < W * H && !seen[q] && diff(p, q) < 12) { seen[q] = 1; st.push(q); } }
+}
+var rows = new Uint16Array(H), cols = new Uint16Array(W);
+for (p = 0; p < W * H; p++) if (!seen[p]) { rows[(p / W) | 0]++; cols[p % W]++; }
+var x0 = 0, x1 = W - 1, y0 = 0, y1 = H - 1;
+while (x0 < W && cols[x0] < 2) x0++; while (x1 > x0 && cols[x1] < 2) x1--;
+while (y0 < H && rows[y0] < 2) y0++; while (y1 > y0 && rows[y1] < 2) y1--;
+if (x1 - x0 < 8 || y1 - y0 < 8) return;
+/* posición de la foto dentro de la tarjeta con object-fit: contain (en fracciones de la tarjeta) */
+var ia = W / H, rw = 1, rh = 1;
+if (ia > CA) rh = CA / ia; else rw = ia / CA;
+var ox = (1 - rw) / 2, oy = (1 - rh) / 2;
+var bx0 = ox + x0 / W * rw, bx1 = ox + (x1 + 1) / W * rw, by0 = oy + y0 / H * rh, by1 = oy + (y1 + 1) / H * rh;
+var s = Math.min(TW / (bx1 - bx0), TH / (by1 - by0));
+if (!white && !plain) s = Math.max(s, 1 / rw, 1 / rh);
+var tx = 0.5 - s * (bx0 + bx1) / 2, ty = 0.5 - s * (by0 + by1) / 2;
+if (!white && !plain) {
+tx = Math.min(-s * ox, Math.max(1 - s * (ox + rw), tx));
+ty = Math.min(-s * oy, Math.max(1 - s * (oy + rh), ty));
+}
+var st2 = img.style;
+st2.setProperty('--ns', s.toFixed(4));
+st2.setProperty('--nx', (tx * 100).toFixed(2) + '%');
+st2.setProperty('--ny', (ty * 100).toFixed(2) + '%');
+st2.setProperty('--hx', ((1.04 * tx - 0.02) * 100).toFixed(2) + '%');
+st2.setProperty('--hy', ((1.04 * ty - 0.02) * 100).toFixed(2) + '%');
+img.classList.add('is-norm');
+if (white) { img.classList.add('is-white'); st2.setProperty('--nb', Math.min(1.15, 255 / lo).toFixed(3)); }
+}).catch(function () {});
+}
+function run() { Array.prototype.forEach.call(document.querySelectorAll('.card-img img'), analyze); }
+run();
+if ('MutationObserver' in window) new MutationObserver(run).observe(document.body, { childList: true, subtree: true });
+})();

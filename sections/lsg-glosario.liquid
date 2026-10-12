@@ -5,7 +5,7 @@
     <p class="kicker">{{ section.settings.kicker }}</p>
     <h2 class="title t-xl" style="margin-top:20px">{{ section.settings.title }} <span class="gold">{{ section.settings.title_gold }}</span></h2>
     </div>
-    <p class="glos-intro">{{ section.settings.intro }}</p>
+    {%- capture glos_wa -%}{% render 'wa-url', message: 'Hola LSG. Quería consultar por el estado de una pieza.' %}{%- endcapture -%}<p class="glos-intro">{{ section.settings.intro }} ¿Querés ver una pieza en detalle? Pedinos fotos, videos o hacenos cualquier consulta por <a href="{{ glos_wa | strip }}" target="_blank" rel="noopener" class="glos-wa">WhatsApp</a>.</p>
     </div>
     <div class="glos-list">
     {%- for block in section.blocks -%}
@@ -25,7 +25,7 @@
     { "type": "text", "id": "kicker", "label": "Texto superior", "default": "Glosario" },
     { "type": "text", "id": "title", "label": "Título", "default": "El estado de cada pieza," },
     { "type": "text", "id": "title_gold", "label": "Título en dorado", "default": "sin letra chica." },
-    { "type": "textarea", "id": "intro", "label": "Introducción", "default": "Declaramos el estado de cada pieza con la misma precisión con la que la elegimos. Tres términos, una sola promesa: lo que ves es exactamente lo que recibís." }
+    { "type": "textarea", "id": "intro", "label": "Introducción", "default": "Declaramos el estado de cada pieza con la misma precisión con la que la elegimos. Tres términos, una sola promesa: transparencia total sobre cada pieza que recibís." }
     ],
     "blocks": [
     { "type": "term", "name": "Término", "settings": [

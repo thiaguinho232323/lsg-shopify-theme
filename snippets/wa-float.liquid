@@ -1,0 +1,11 @@
+{%- comment -%} Botón flotante de WhatsApp · visible en toda la tienda {%- endcomment -%}
+{%- if template.name == 'product' and product -%}
+  {%- capture _m -%}Hola LSG. Estoy viendo {{ product.title }} en la web y quería consultarles. {{ shop.url }}{{ product.url }}{%- endcapture -%}
+{%- else -%}
+  {%- assign _m = 'Hola LSG. Estoy viendo la web y quería hacerles una consulta.' -%}
+{%- endif -%}
+{%- capture _wa -%}{% render 'wa-url', message: _m %}{%- endcapture -%}
+<a class="wa-float" href="{{ _wa | strip }}" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp" data-wa-float>
+  <span class="wa-float-lbl">Escribinos</span>
+  <span class="wa-float-ic">{% render 'icon', name: 'whatsapp' %}</span>
+</a>

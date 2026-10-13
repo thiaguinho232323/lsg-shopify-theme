@@ -69,7 +69,7 @@
                 </button>
               {%- endfor -%}
             </div>
-            {%- if p_vendida -%}<span class="badge badge-sold">Vendida</span>{%- elsif p_badge != '' -%}<span class="badge">{{ p_badge }}</span>{%- endif -%}
+            {%- if p_vendida -%}<span class="badge badge-sold">Vendida</span>{%- elsif p_badge != '' -%}<span class="badge">{{ p_badge }}</span>{%- endif -%}{%- unless p_vendida -%}{%- if p_cond != '' -%}{%- render 'cond-badge', cond: p_cond, class: 'cond-lg' -%}{%- endif -%}{%- endunless -%}
             {%- if product.images.size > 1 -%}
               <div class="dots">{%- for img in product.images -%}<i class="{% if forloop.first %}on{% endif %}"></i>{%- endfor -%}</div>
             {%- endif -%}
@@ -98,7 +98,7 @@
           <p class="price-note">Precio en dólares. Consultanos por pago en pesos.</p>{%- endif -%}
           <dl class="specs">
             <div><dt>Talle</dt><dd>{{ p_talle }}</dd></div>
-            {%- if p_cond != '' -%}<div><dt>Condición</dt><dd>{{ p_cond }}</dd></div>{%- endif -%}
+            {%- if p_cond != '' -%}<div><dt>Condición</dt><dd>{%- render 'cond-badge', cond: p_cond, mode: 'text' -%}</dd></div>{%- endif -%}
             {%- if product.type != blank -%}<div><dt>Categoría</dt><dd>{{ product.type }}</dd></div>{%- endif -%}
           </dl>
           {%- if cond_note != '' -%}<p class="cond-note">{{ cond_note }}</p><button type="button" class="cond-link link-u" onclick="document.getElementById('glos-dlg').showModal()">Glosario de estados</button><dialog id="glos-dlg" class="glos-dlg" aria-label="Glosario de estados" onclick="if(event.target===this)this.close()"><div class="gd-in"><div class="gd-h"><p class="kicker">Glosario de estados</p><button type="button" class="gd-x" aria-label="Cerrar" onclick="this.closest('dialog').close()">✕</button></div><dl class="gd-list"><div><dt><span class="gd-code">NEW · DS</span><span class="gd-name">Nueva</span></dt><dd>Sin uso. Con sus etiquetas o en su caja original, tal como salió de la casa. DS (Deadstock) significa lo mismo.</dd></div><div><dt><span class="gd-code">VNDS</span><span class="gd-name">Igual a nueva</span></dt><dd>Very Near Deadstock. Entre 2 y 3 usos, sin marcas ni detalles visibles. A la vista y al tacto, está igual a nueva.</dd></div><div><dt><span class="gd-code">USED</span><span class="gd-name">Usada · excelente estado</span></dt><dd>Con uso y en excelente estado, revisada en detalle. Escribinos por WhatsApp y te mostramos su condición real.</dd></div></dl></div></dialog>{%- endif -%}

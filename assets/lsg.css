@@ -41,7 +41,7 @@ ul { padding: 0; list-style: none; }
 .btn-ghost:hover { border-color: rgba(17,17,17,.6); color: var(--ivory); }
 .btn svg { width: 14px; height: 14px; }
 
-.lsg-wm { display: block; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 15px; line-height: 1; letter-spacing: .24em; text-transform: uppercase; white-space: nowrap; color: inherit; } .lsg-wm em { font-style: normal; color: var(--gold); } @media (max-width: 600px) { .lsg-wm { font-size: 12.5px; letter-spacing: .16em; } } .link-u { position: relative; }
+.lsg-wm { display: block; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 12.5px; line-height: 1; letter-spacing: .22em; text-transform: uppercase; white-space: nowrap; color: inherit; } .lsg-wm em { font-style: normal; color: var(--gold); } @media (max-width: 600px) { .lsg-wm { font-size: 10.5px; letter-spacing: .15em; } } .link-u { position: relative; }
 .link-u::after { content: ''; position: absolute; left: 0; bottom: -4px; height: 1px; width: 100%; background: var(--gold); transform: scaleX(0); transform-origin: right; transition: transform .5s; }
 .link-u:hover::after { transform: scaleX(1); transform-origin: left; }
 

@@ -455,3 +455,33 @@ body:has(.hero) .hdr:not(.is-solid) .nav a{color:rgba(237,232,223,.8);}
   .burger { display: flex !important; }
 }
 @media (max-width: 1099px) { .lsgc-act + .burger, .burger { margin-left: 4px; } }
+
+/* Estado de la pieza: NEW · VNDS · USED */
+.state.cond { display: inline-flex; align-items: center; gap: 0; padding: 4px 8px; line-height: 1.2; }
+.state.cond b { font-weight: 500; letter-spacing: .2em; }
+.state.cond i { font-style: normal; display: none; letter-spacing: .18em; }
+.state.cond.cond-new { background: #111; border-color: #111; color: #fff; }
+.state.cond.cond-vnds { background: rgba(255,255,255,.85); border-color: #111; color: #111; }
+.state.cond.cond-used { background: rgba(255,255,255,.85); border-color: rgba(17,17,17,.22); color: #5f5b55; }
+.gal-main .state.cond { right: 16px; top: 16px; padding: 6px 10px; font-size: 9px; pointer-events: none; z-index: 2; }
+.gal-main .state.cond i { display: inline; }
+@media (max-width: 480px) { .gal-main .state.cond i { display: none; } }
+.cond-txt b { font-weight: 500; letter-spacing: .18em; }
+.cond-txt span { color: var(--stone); }
+.cond-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--stone); font-size: 9.5px; letter-spacing: .22em; }
+.cond-legend b { font-weight: 500; color: #111; margin-right: 6px; }
+@media (max-width: 767px) { .cond-legend { order: 3; flex-basis: 100%; gap: 6px 14px; font-size: 9px; letter-spacing: .16em; } }
+
+/* WhatsApp flotante */
+.wa-float { position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 60; display: flex; align-items: center; gap: 0; color: #fff; text-decoration: none; transition: opacity .35s, transform .35s; }
+.wa-float-ic { width: 54px; height: 54px; border-radius: 50%; background: #111; border: 1px solid rgba(198,166,100,.55); display: grid; place-items: center; box-shadow: 0 10px 30px -10px rgba(0,0,0,.45); transition: background .3s, transform .3s; }
+.wa-float-ic svg { width: 24px; height: 24px; }
+.wa-float-lbl { max-width: 0; overflow: hidden; white-space: nowrap; opacity: 0; margin-right: 0; padding: 10px 0; background: #111; color: #fff; font-size: 9.5px; text-transform: uppercase; letter-spacing: .3em; transition: max-width .4s, opacity .3s, padding .4s, margin .4s; }
+.wa-float:hover .wa-float-ic, .wa-float:focus-visible .wa-float-ic { background: #9c7a3c; border-color: #9c7a3c; transform: scale(1.04); }
+@media (hover: hover) and (min-width: 768px) {
+  .wa-float { right: 28px; bottom: 28px; }
+  .wa-float-ic { width: 58px; height: 58px; }
+  .wa-float:hover .wa-float-lbl { max-width: 160px; opacity: 1; padding: 10px 16px 10px 18px; margin-right: 10px; }
+}
+.menu-open .wa-float, .lsgc-lock .wa-float { opacity: 0; pointer-events: none; transform: translateY(8px); }
+@media print { .wa-float { display: none; } }

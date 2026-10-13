@@ -439,3 +439,19 @@ body:has(.hero) .hdr:not(.is-solid) .nav a{color:rgba(237,232,223,.8);}
 .card-img img.is-white{mix-blend-mode:multiply;filter:brightness(var(--nb,1))}
 .card.is-sold .card-img img.is-white{filter:grayscale(1) brightness(var(--nb,1))}
 .state.cond{background:rgba(255,255,255,.75);border:1px solid rgba(17,17,17,.15);color:#111;backdrop-filter:blur(4px)}
+
+
+/* ===== Ajustes LSG · header, WhatsApp flotante y estado ===== */
+/* Header: nada se parte en dos líneas y el carrito nunca se corta */
+.hdr-in { gap: 24px; }
+.hdr-in > a:first-child { flex-shrink: 0; }
+.nav { gap: clamp(22px, 2.6vw, 40px); }
+.nav a { white-space: nowrap; }
+.hdr-cta { white-space: nowrap; }
+.lsgc-act { flex-shrink: 0; margin-left: auto; }
+.burger { flex-shrink: 0; }
+@media (min-width: 768px) and (max-width: 1099px) {
+  .nav, .hdr-cta { display: none !important; }
+  .burger { display: flex !important; }
+}
+@media (max-width: 1099px) { .lsgc-act + .burger, .burger { margin-left: 4px; } }

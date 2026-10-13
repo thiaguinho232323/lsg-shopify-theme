@@ -444,6 +444,7 @@ body:has(.hero) .hdr:not(.is-solid) .nav a{color:rgba(237,232,223,.8);}
 /* ===== Ajustes LSG · header, WhatsApp flotante y estado ===== */
 /* Header: nada se parte en dos líneas y el carrito nunca se corta */
 .hdr-in { gap: 24px; }
+@media (max-width: 767px) { .hdr-in { gap: 10px; } .lsgc-act { gap: 8px; } .burger { margin-right: -8px; } }
 .hdr-in > a:first-child { flex-shrink: 0; }
 .nav { gap: clamp(22px, 2.6vw, 40px); }
 .nav a { white-space: nowrap; }
@@ -485,3 +486,6 @@ body:has(.hero) .hdr:not(.is-solid) .nav a{color:rgba(237,232,223,.8);}
 }
 .menu-open .wa-float, .lsgc-lock .wa-float { opacity: 0; pointer-events: none; transform: translateY(8px); }
 @media print { .wa-float { display: none; } }
+
+/* Tarjetas en celular: "Pieza única" abajo para que no choque con el estado */
+@media (max-width: 767px) { .card .badge { top: auto; bottom: 8px; left: 8px; } .card .state { right: 8px; top: 8px; } }

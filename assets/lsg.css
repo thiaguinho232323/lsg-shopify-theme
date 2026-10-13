@@ -448,13 +448,13 @@ body:has(.hero) .hdr:not(.is-solid) .nav a{color:rgba(237,232,223,.8);}
 .nav { gap: clamp(22px, 2.6vw, 40px); }
 .nav a { white-space: nowrap; }
 .hdr-cta { white-space: nowrap; }
-.lsgc-act { flex-shrink: 0; margin-left: auto; }
+.lsgc-act { flex-shrink: 0; }
+@media (max-width: 1099px) { .lsgc-act { margin-left: auto; } }
 .burger { flex-shrink: 0; }
 @media (min-width: 768px) and (max-width: 1099px) {
   .nav, .hdr-cta { display: none !important; }
   .burger { display: flex !important; }
 }
-@media (max-width: 1099px) { .lsgc-act + .burger, .burger { margin-left: 4px; } }
 
 /* Estado de la pieza: NEW · VNDS · USED */
 .state.cond { display: inline-flex; align-items: center; gap: 0; padding: 4px 8px; line-height: 1.2; }

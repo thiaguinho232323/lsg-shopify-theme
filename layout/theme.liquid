@@ -8,11 +8,7 @@
     <title>
       {%- if template.name == 'index' -%}LSG — Luxury Selection Gallery{%- else -%}{{ page_title }} · LSG{%- endif -%}
     </title>
-    {%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- else -%}<meta name="description" content="Selección de piezas de diseñador originales en Argentina. Elegido para pocos.">{%- endif -%}
-    <meta property="og:site_name" content="LSG — Luxury Selection Gallery">
-    <meta property="og:title" content="{{ page_title | escape }}">
-    {%- if template.name == 'product' and product.featured_image -%}<meta property="og:image" content="https:{{ product.featured_image | image_url: width: 1200 }}">{%- endif -%}
-    <link rel="icon" type="image/svg+xml" href="{{ 'icon.svg' | asset_url }}">
+    {% render 'social-meta' %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Jost:wght@300;400;500&display=swap">

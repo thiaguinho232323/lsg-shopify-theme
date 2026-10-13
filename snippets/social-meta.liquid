@@ -26,11 +26,11 @@
   {%- assign sm_talle = '' -%}
   {%- for option in product.options_with_values -%}{%- assign on = option.name | downcase -%}{%- if on contains 'talle' or on contains 'talla' or on contains 'size' -%}{%- assign sm_talle = option.values | join: ' / ' -%}{%- endif -%}{%- endfor -%}
   {%- if sm_talle == '' -%}{%- for s in product.metafields.shopify.size.value -%}{%- if forloop.first -%}{%- assign sm_talle = s.label -%}{%- else -%}{%- assign sm_talle = sm_talle | append: ' / ' | append: s.label -%}{%- endif -%}{%- endfor -%}{%- endif -%}
-  {%- capture sm_price -%}USD {{ product.price | divided_by: 100 | round | replace: ',', '.' }}{%- endcapture -%}
+  {%- capture sm_price -%}USD {{ product.price | money_without_currency | strip_html | remove: '.00' | replace: ',', '.' }}{%- endcapture -%}
   {%- capture sm_title -%}{{ product.title }} · {% if product.available %}{{ sm_price }}{% else %}Vendida{% endif %} · LSG{%- endcapture -%}
   {%- capture sm_desc -%}{{ product.vendor }}{% if sm_talle != '' %} · Talle {{ sm_talle }}{% endif %}{% if sm_cond_txt != '' %} · Estado {{ sm_cond_txt }}{% endif %}. {% if product.available %}Pieza original seleccionada por LSG. Consultá por WhatsApp, envíos a todo el país.{% else %}Esta pieza ya se vendió: podemos conseguirla por encargo.{% endif %}{%- endcapture -%}
   {%- if product.featured_image -%}
-    {%- assign sm_img = product.featured_image | image_url: width: 1200 | prepend: 'https:' -%}
+    {%- assign sm_img = product.featured_image | image_url: width: 1200, format: 'jpg' | prepend: 'https:' -%}
     {%- assign sm_img_w = 1200 -%}{%- assign sm_img_h = 1200 | times: product.featured_image.height | divided_by: product.featured_image.width -%}
     {%- assign sm_img_alt = product.title -%}
   {%- endif -%}
@@ -57,7 +57,7 @@
 <meta property="og:image:height" content="{{ sm_img_h }}">
 <meta property="og:image:alt" content="{{ sm_img_alt | escape }}">
 {%- if sm_type == 'product' %}
-<meta property="product:price:amount" content="{{ product.price | money_without_currency | strip_html }}">
+<meta property="product:price:amount" content="{{ product.price | divided_by: 100.0 }}">
 <meta property="product:price:currency" content="USD">
 <meta property="product:availability" content="{% if product.available %}in stock{% else %}out of stock{% endif %}">
 {%- endif %}

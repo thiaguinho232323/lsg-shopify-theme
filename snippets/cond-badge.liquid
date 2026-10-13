@@ -1,0 +1,18 @@
+{%- comment -%}
+  Estado de la pieza (desde la etiqueta condicion:XX)
+  NEW = nueva · VNDS = igual a nueva · USED = usado en excelente estado
+  Uso: {% render 'cond-badge', cond: p_cond %}               -> etiqueta sobre la foto
+       {% render 'cond-badge', cond: p_cond, mode: 'text' %} -> texto para la ficha
+{%- endcomment -%}
+{%- assign _c = cond | upcase | strip -%}
+{%- case _c -%}
+  {%- when 'DS' or 'NEW' or 'NUEVA' or 'NUEVO' -%}{%- assign _code = 'NEW' -%}{%- assign _lbl = 'Nueva' -%}{%- assign _k = 'new' -%}
+  {%- when 'VNDS' -%}{%- assign _code = 'VNDS' -%}{%- assign _lbl = 'Igual a nueva' -%}{%- assign _k = 'vnds' -%}
+  {%- when 'USED' or 'USADA' or 'USADO' -%}{%- assign _code = 'USED' -%}{%- assign _lbl = 'Excelente estado' -%}{%- assign _k = 'used' -%}
+  {%- else -%}{%- assign _code = cond | strip -%}{%- assign _lbl = '' -%}{%- assign _k = 'other' -%}
+{%- endcase -%}
+{%- if mode == 'text' -%}
+  <span class="cond-txt cond-{{ _k }}"><b>{{ _code }}</b>{% if _lbl != '' %}<span> · {{ _lbl }}</span>{% endif %}</span>
+{%- else -%}
+  <span class="state cond cond-{{ _k }}{% if class %} {{ class }}{% endif %}" title="{{ _code }}{% if _lbl != '' %} · {{ _lbl }}{% endif %}"><b>{{ _code }}</b>{% if _lbl != '' %}<i> · {{ _lbl }}</i>{% endif %}</span>
+{%- endif -%}

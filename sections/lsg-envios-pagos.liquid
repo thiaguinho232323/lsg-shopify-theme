@@ -1,0 +1,56 @@
+{%- capture wa -%}{% render 'wa-url', message: 'Hola LSG. Tengo una consulta sobre envíos y pagos.' %}{%- endcapture -%}
+<style>
+.ep{--g:#9c7a3c;--ln:#e6e1d6;max-width:1100px;margin:0 auto;padding:150px 24px 110px;font-family:Jost,system-ui,sans-serif;color:#1a1a1a}
+.ep .kicker{display:block;margin-bottom:22px}
+.ep h1{font-weight:300;font-size:clamp(40px,6vw,72px);line-height:1.05;margin:0 0 26px}
+.ep h1 .gold{color:var(--g)}
+.ep-lead{max-width:560px;font-size:17px;font-weight:300;color:#555;line-height:1.65;margin:0 0 80px}
+.ep h2{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--g);font-weight:400;margin:0 0 22px;padding-bottom:16px;border-bottom:1px solid var(--ln)}
+.ep-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--ln);margin-bottom:80px}
+.ep-grid.four{grid-template-columns:repeat(4,1fr)}
+.ep-card{padding:34px 28px;border-left:1px solid var(--ln)}
+.ep-card:first-child{border-left:0}
+.ep-card.hl{background:#faf7f1}
+.ep-ic{width:26px;height:26px;stroke:var(--g);fill:none;stroke-width:1.2;margin-bottom:22px}
+.ep-k{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8a8a8a;margin-bottom:10px}
+.ep-pill{display:inline-block;margin-left:8px;border:1px solid var(--g);color:var(--g);padding:2px 7px;letter-spacing:.14em}
+.ep-card h3{font-weight:400;font-size:21px;line-height:1.3;margin:0 0 10px}
+.ep-card p{font-size:14px;font-weight:300;color:#666;line-height:1.6;margin:0}
+.ep-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-bottom:80px}
+.ep-steps .n{font-size:44px;font-weight:300;color:var(--g);line-height:1;margin-bottom:14px}
+.ep-steps h3{font-weight:400;font-size:18px;margin:0 0 8px}
+.ep-steps p{font-size:14px;font-weight:300;color:#666;line-height:1.6;margin:0}
+.ep-cta{text-align:center;border-top:1px solid var(--ln);padding-top:60px}
+.ep-cta p{font-size:16px;font-weight:300;color:#555;margin:0 0 22px}
+.ep-btn{display:inline-block;border:1px solid var(--g);color:var(--g);padding:16px 38px;font-size:12px;letter-spacing:.28em;text-transform:uppercase;text-decoration:none}
+@media(max-width:800px){.ep{padding-top:120px}.ep-grid,.ep-grid.four,.ep-steps{grid-template-columns:1fr}.ep-card{border-left:0;border-top:1px solid var(--ln)}.ep-card:first-child{border-top:0}}
+</style>
+<div class="ep">
+<span class="kicker">Envíos y pagos</span>
+<h1>Simple, rápido <span class="gold">y sin costo.</span></h1>
+<p class="ep-lead">Todos los envíos son gratis. Elegís cómo recibir tu pieza y cómo pagarla, y nosotros nos encargamos del resto.</p>
+<h2>Envíos</h2>
+<div class="ep-grid">
+<div class="ep-card"><svg class="ep-ic" viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg><div class="ep-k">CABA<span class="ep-pill">Gratis</span></div><h3>En moto, te llega hoy</h3><p>Comprando antes de las 15 hs la recibís en el día. Previo pago.</p></div>
+<div class="ep-card"><svg class="ep-ic" viewBox="0 0 24 24"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg><div class="ep-k">Todo el país<span class="ep-pill">Gratis</span></div><h3>Andreani</h3><p>Despachamos en el día. Llega en 3 a 5 días hábiles según la zona.</p></div>
+<div class="ep-card"><svg class="ep-ic" viewBox="0 0 24 24"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg><div class="ep-k">Retiro<span class="ep-pill">Sin cargo</span></div><h3>Palermo o Puerto Madero</h3><p>Coordinamos el punto exacto de entrega por WhatsApp.</p></div>
+</div>
+<h2>Medios de pago</h2>
+<div class="ep-grid four">
+<div class="ep-card hl"><svg class="ep-ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 9h7M12 9v7M9 12.2c1.8.7 4.2.7 6 0"/></svg><div class="ep-k">Cripto<span class="ep-pill">5% OFF</span></div><h3>USDT</h3><p>Cualquier red. Te enviamos la billetera y el monto final con el descuento aplicado.</p></div>
+<div class="ep-card"><svg class="ep-ic" viewBox="0 0 24 24"><path d="M3 9l9-5 9 5M5 10v7M9.5 10v7M14.5 10v7M19 10v7M3 20h18"/></svg><div class="ep-k">Transferencia</div><h3>En pesos</h3><p>Te pasamos CBU / alias al confirmar el pedido.</p></div>
+<div class="ep-card"><svg class="ep-ic" viewBox="0 0 24 24"><path d="M3 9l9-5 9 5M5 10v7M9.5 10v7M14.5 10v7M19 10v7M3 20h18"/></svg><div class="ep-k">Transferencia</div><h3>En dólares</h3><p>Te pasamos los datos de la cuenta en USD.</p></div>
+<div class="ep-card"><svg class="ep-ic" viewBox="0 0 24 24"><rect x="2.5" y="6.5" width="19" height="11" rx="1"/><circle cx="12" cy="12" r="2.6"/></svg><div class="ep-k">Efectivo</div><h3>Dólares</h3><p>Pagás al momento de la entrega o el retiro.</p></div>
+</div>
+<h2>Cómo es la compra</h2>
+<div class="ep-steps">
+<div><div class="n">01</div><h3>Elegís tu pieza</h3><p>En el checkout elegís el envío o retiro y el medio de pago.</p></div>
+<div><div class="n">02</div><h3>Te contactamos</h3><p>Te escribimos con los datos para pagar y el monto final.</p></div>
+<div><div class="n">03</div><h3>La recibís</h3><p>Con el pago confirmado despachamos o coordinamos la entrega.</p></div>
+</div>
+<div class="ep-cta"><p>¿Tenés alguna duda sobre envíos o pagos?</p><a class="ep-btn" href="{{ wa | strip }}" target="_blank" rel="noopener">Escribinos por WhatsApp</a></div>
+</div>
+{% schema %}
+{ "name": "Envíos y pagos", "settings": [] }
+{% endschema %}
+ 

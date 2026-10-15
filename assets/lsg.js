@@ -36,7 +36,7 @@
 
   /* ---------- Video del inicio: clips en secuencia con fundido ---------- */
   var media = $('[data-hero-video]');
-  if (media) {}
+  if (media) {
     var mobile = window.matchMedia('(max-width: 767px)').matches;
     var clips = (media.getAttribute('data-hero-video') || '').split(';').filter(Boolean).map(function (c) {
       var p = c.split('|'); return mobile && p[1] ? p[1] : p[0];

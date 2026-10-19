@@ -9,26 +9,47 @@
  */
 {
   "sections": {
-    "glosario": { "type": "lsg-glosario", "settings": {}, "blocks": { "t1": { "type": "term", "settings": { "code": "NEW", "alias": "DS", "name": "Nueva", "full": "Deadstock", "text": "Sin uso. Con sus etiquetas o en su caja original, tal como salió de la casa." } }, "t2": { "type": "term", "settings": { "code": "VNDS", "name": "Igual a nueva", "full": "Very Near Deadstock", "text": "Entre 2 y 3 usos, sin marcas ni detalles visibles. A la vista y al tacto, está igual a nueva." } }, "t3": { "type": "term", "settings": { "code": "USED", "name": "Usada · excelente estado", "full": "Pre-owned", "text": "Con uso y en excelente estado, revisada en detalle. Escribinos por WhatsApp y te mostramos su condición real." } } }, "block_order": ["t1", "t2", "t3"] },
     "hero": {
       "type": "lsg-hero",
-      "settings": {}
+      "settings": {
+        "kicker": "Luxury Selection Gallery · Argentina",
+        "line_1": "Una pieza.",
+        "line_2": "Un dueño.",
+        "sub": "Piezas de diseñador seleccionadas una a una. Originales, únicas y disponibles en Argentina.",
+        "video_1": "https://videos.pexels.com/video-files/9760427/9760427-hd_1366_720_25fps.mp4",
+        "video_1_mobile": "https://videos.pexels.com/video-files/9760427/9760427-sd_960_506_25fps.mp4",
+        "video_2": "https://videos.pexels.com/video-files/9760434/9760434-hd_1366_720_25fps.mp4",
+        "video_2_mobile": "https://videos.pexels.com/video-files/9760434/9760434-sd_960_506_25fps.mp4",
+        "video_3": "https://videos.pexels.com/video-files/9760626/9760626-hd_1366_720_25fps.mp4",
+        "video_3_mobile": "https://videos.pexels.com/video-files/9760626/9760626-sd_960_506_25fps.mp4"
+      }
     },
     "featured": {
       "type": "lsg-featured",
-      "settings": {}
+      "settings": {
+        "kicker": "La selección",
+        "title": "Piezas",
+        "title_gold": "destacadas"
+      }
     },
     "phrase": {
       "type": "lsg-phrase",
-      "settings": {}
+      "settings": {
+        "line_1": "Cada pieza fue elegida.",
+        "line_2": "Ninguna está por casualidad.",
+        "image_url": "https://images.pexels.com/photos/12040575/pexels-photo-12040575.jpeg?auto=compress&cs=tinysrgb&w=2000"
+      }
     },
     "brands": {
       "type": "lsg-brands",
-      "settings": {}
+      "settings": {
+        "kicker": "Casas seleccionadas",
+        "title": "Marcas",
+        "text": "Trabajamos con pocas casas y las conocemos en detalle. Elegí una para ver sus piezas disponibles."
+      }
     },
     "mirada": {
       "type": "lsg-mirada",
-      "settings": {},
       "blocks": {
         "p1": {
           "type": "principio",
@@ -59,11 +80,73 @@
         "p1",
         "p2",
         "p3"
-      ]
+      ],
+      "settings": {
+        "image_url": "https://images.pexels.com/photos/5864249/pexels-photo-5864249.jpeg?auto=compress&cs=tinysrgb&w=2000",
+        "kicker": "Nuestra mirada",
+        "title": "Elegimos menos para que cada pieza",
+        "title_gold": "diga más.",
+        "text": "Hace cuatro años que buscamos, revisamos y seleccionamos piezas de diseñador. LSG nace de esa mirada: una selección reducida, donde cada pieza entra porque la elegimos y llega directo a quien la estaba buscando."
+      }
+    },
+    "glosario": {
+      "type": "lsg-glosario",
+      "blocks": {
+        "t1": {
+          "type": "term",
+          "settings": {
+            "code": "NEW",
+            "alias": "DS",
+            "name": "Nueva",
+            "full": "Deadstock",
+            "text": "Sin uso. Con sus etiquetas o en su caja original, tal como salió de la casa."
+          }
+        },
+        "t2": {
+          "type": "term",
+          "settings": {
+            "code": "VNDS",
+            "alias": "",
+            "name": "Igual a nueva",
+            "full": "Very Near Deadstock",
+            "text": "Entre 2 y 3 usos, sin marcas ni detalles visibles. A la vista y al tacto, está igual a nueva."
+          }
+        },
+        "t3": {
+          "type": "term",
+          "settings": {
+            "code": "USED",
+            "alias": "",
+            "name": "Usada · excelente estado",
+            "full": "Pre-owned",
+            "text": "Con uso y en excelente estado, revisada en detalle. Escribinos por WhatsApp y te mostramos su condición real."
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "settings": {
+        "kicker": "Glosario",
+        "title": "El estado de cada pieza,",
+        "title_gold": "sin letra chica.",
+        "intro": "Declaramos el estado de cada pieza con la misma precisión con la que la elegimos. Tres términos, una sola promesa: transparencia total sobre cada pieza que recibís."
+      }
+    },
+    "encargos": {
+      "type": "lsg-encargos",
+      "settings": {
+        "image_url": "https://images.pexels.com/photos/6612782/pexels-photo-6612782.jpeg?auto=compress&cs=tinysrgb&w=2000",
+        "kicker": "Encargos",
+        "title": "¿Buscás una pieza",
+        "title_gold": "en particular?",
+        "text": "Contanos cuál, en qué talle, y la buscamos para vos."
+      }
     },
     "steps": {
       "type": "lsg-steps",
-      "settings": {},
       "blocks": {
         "s1": {
           "type": "paso",
@@ -94,11 +177,11 @@
         "s1",
         "s2",
         "s3"
-      ]
-    },
-    "encargos": {
-      "type": "lsg-encargos",
-      "settings": {}
+      ],
+      "settings": {
+        "kicker": "Atención personalizada",
+        "title": "Cómo adquirir una pieza"
+      }
     }
   },
   "order": [
@@ -107,8 +190,8 @@
     "phrase",
     "brands",
     "mirada",
-"glosario",
-"encargos",
-"steps"
+    "glosario",
+    "encargos",
+    "steps"
   ]
 }
